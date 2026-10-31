@@ -49,9 +49,13 @@ The round shutter button, or the camera button during an encounter, saves a phot
 
 Up to 8 hunters share a phone, each with their own Spookydex, candy, quests, and photos. Tap the hunter pill or Family to switch, add, or remove hunters and see everyone ranked by spooks found, with how many of today's quests each has done and the family's combined Spookydex.
 
-## Sound
+## Sound and music
 
-Fifteen small Web Audio synths (no audio files) for throws, hits, wobbles, catches, breakouts, level ups, quests, evolution, the shutter, and walk spawns. Settings turns sound on or off.
+Fifteen small Web Audio synths (no audio files) for throws, hits, wobbles, catches, breakouts, level ups, quests, evolution, the shutter, and walk spawns.
+
+The music is generated live in Web Audio too, scheduled a quarter second ahead so it never drifts. While you hunt, a slow D minor music box theme plays over a low drone, and turning on Walk adds a walking bassline and a soft tick. Every encounter switches to a track for that spook's rarity: a bouncy A minor pluck tune for commons, a pulsing E minor square wave groove for uncommons, a fast C minor arpeggio with timpani hits for rares, and a slow organ, choir, and bell theme for legendaries. A glowing spook plays the music one tier up. Tracks crossfade in about a second and return to the hunting theme when the encounter ends. Music pauses when the app is hidden and stops at Home.
+
+Settings has Sound (everything on or off), Music (on or off), and separate Music and Effects volume sliders, so the music can sit under the effects at whatever balance you like. Those choices are kept in `hallowhunt.settings`.
 
 ## Catch formula
 

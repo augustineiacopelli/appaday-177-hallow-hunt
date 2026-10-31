@@ -265,6 +265,10 @@ body.walking #chips,body.walking #centerBtn,body.walking #runBtn,body.walking #e
 .prow button{flex:1;min-height:48px;border-radius:14px;font-weight:900;background:rgba(255,255,255,.08)}
 .prow .b1{background:var(--accent);color:#fff}
 .prow .danger{flex:1}
+.rng{width:100%;height:44px;accent-color:var(--accent);background:none;cursor:pointer}
+.rng:disabled{opacity:.4;cursor:default}
+.vv{float:right;color:var(--ink-dim);letter-spacing:0}
+.seg.dim{opacity:.4;pointer-events:none}
 .empty{text-align:center;color:var(--ink-faint);font-weight:700;padding:24px 10px;line-height:1.5}
 </style>
 </head>
@@ -391,7 +395,7 @@ function isNight(d) { const h = (d || new Date()).getHours(); return h >= 19 || 
 /* ---------- settings (localStorage) ---------- */
 const SET_KEY = 'hallowhunt.settings';
 const settings = (function () {
-  const def = { view: 'auto', tutorial: true, mute: false };
+  const def = { view: 'auto', tutorial: true, mute: false, music: true, musicVol: 0.6, sfxVol: 0.8 };
   try { const s = JSON.parse(localStorage.getItem(SET_KEY) || '{}'); return Object.assign(def, s); } catch (e) { return def; }
 })();
 function saveSettings() { try { localStorage.setItem(SET_KEY, JSON.stringify(settings)); } catch (e) { /* storage blocked */ } }
@@ -1208,7 +1212,7 @@ async function startHunt() {
   $('title').classList.add('hidden');
   ['hud', 'chips'].forEach((id) => $(id).classList.remove('hidden'));
   $('chipMode').innerHTML = mode === 'magic' ? '<b>Camera</b> on' : mode === 'gyro' ? '<b>Look around</b> with your phone' : '<b>Drag</b> to look around';
-  G.hunting = true; G.spawnT = 0.8; G.spawned = 0; G.night = isNight(); updateChips();
+  G.hunting = true; G.spawnT = 0.8; G.spawned = 0; G.night = isNight(); updateChips(); Music.play('explore');
   if (mode === 'drag') { Drag.yaw = 0; Drag.pitch = 0; } else { recenter(true); }
   if (mode === 'drag' && settings.view !== 'drag') toast('No motion sensor here, so drag to look around the spooky yard.', 3200);
   else if (mode === 'gyro' && settings.view === 'auto') toast('Camera is off, so you are hunting in the spooky yard.', 3200);
@@ -1217,6 +1221,7 @@ async function startHunt() {
   if (!rafId) rafId = requestAnimationFrame(frame);
 }
 function endHunt() {
+  Music.stop();
   G.hunting = false; endEncounter(true); stopWalk(true); keepAwake(false); hideLastShot();
   for (const cr of G.creatures.slice()) despawn(cr);
   stopCamera();
@@ -1371,7 +1376,7 @@ function startEncounter(cr) {
   resetLantern();
   $('hud').classList.add('hidden'); $('chips').classList.add('hidden');
   $('runBtn').classList.remove('hidden'); $('encInfo').classList.remove('hidden'); $('encSnap').classList.remove('hidden'); hideLastShot();
-  sfx('appear');
+  sfx('appear'); Music.play(encounterTrack(sp, cr.glow));
   $('encName').textContent = (cr.glow ? 'Glowing ' : '') + sp.name;
   const rr = $('encRar'); rr.textContent = RARITY[sp.rar].label + (caughtCount(sp.id) ? ' \u00b7 caught ' + caughtCount(sp.id) : ' \u00b7 new'); rr.style.color = 'var(--' + sp.rar + ')';
   if (navigator.vibrate) try { navigator.vibrate(20); } catch (e) { /* ignore */ }
@@ -1379,6 +1384,7 @@ function startEncounter(cr) {
 function endEncounter(silent) {
   if (!G.enc) return;
   G.enc = null;
+  if (G.hunting) Music.play('explore');
   for (const c of G.creatures) if (c.sprite) c.sprite.visible = true;
   $('runBtn').classList.add('hidden'); $('encInfo').classList.add('hidden'); $('encSnap').classList.add('hidden');
   if (G.hunting && !silent) { $('hud').classList.remove('hidden'); $('chips').classList.remove('hidden'); updateChips(); }
@@ -2037,7 +2043,7 @@ async function keepAwake(on) {
 
 /* ---------- sound: small Web Audio synths, no files ---------- */
 let sfxGain = null, noiseBuf = null;
-function sfxOut() { if (!sfxGain) { sfxGain = audioCtx.createGain(); sfxGain.gain.value = 0.55; sfxGain.connect(audioCtx.destination); } return sfxGain; }
+function sfxOut() { if (!sfxGain) { sfxGain = audioCtx.createGain(); sfxGain.gain.value = sfxLevel(); sfxGain.connect(audioCtx.destination); } return sfxGain; }
 function tone(t, f0, f1, dur, type, vol, delay) {
   const ac = audioCtx, s = t + (delay || 0); const o = ac.createOscillator(), g = ac.createGain();
   o.type = type || 'sine'; o.frequency.setValueAtTime(f0, s); if (f1 && f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, s + dur);
@@ -2074,6 +2080,131 @@ function sfx(name) {
   try { if (audioCtx.state === 'suspended') audioCtx.resume(); const f = SFX[name]; if (f) f(audioCtx.currentTime + 0.01); } catch (e) { /* sound is optional */ }
 }
 
+/* ---------- music: generative Web Audio score, one track for hunting and one per rarity tier ---------- */
+const Music = { master: null, bus: null, track: null, name: '', want: '', timer: 0, next: 0, i: 0 };
+function musicLevel() { return settings.mute || !settings.music ? 0 : settings.musicVol * 0.5; }
+function sfxLevel() { return settings.sfxVol * 0.7; }
+function musicOut() { if (!Music.master) { Music.master = audioCtx.createGain(); Music.master.gain.value = musicLevel(); Music.master.connect(audioCtx.destination); } return Music.master; }
+function applyVolumes() {
+  if (!audioCtx) return;
+  const t = audioCtx.currentTime;
+  if (sfxGain) sfxGain.gain.setTargetAtTime(sfxLevel(), t, 0.05);
+  if (Music.master) Music.master.gain.setTargetAtTime(musicLevel(), t, 0.1);
+  if (musicLevel() === 0) Music.stop(true); else if (G.hunting && Music.want && !Music.timer) Music.play(Music.want);
+}
+const mtof = (m) => 440 * Math.pow(2, (m - 69) / 12);
+function mNote(t, m, dur, o) {
+  o = o || {}; const ac = audioCtx;
+  const osc = ac.createOscillator(); osc.type = o.type || 'triangle'; osc.frequency.setValueAtTime(mtof(m), t);
+  if (o.detune) osc.detune.value = o.detune;
+  if (o.drop) osc.frequency.exponentialRampToValueAtTime(mtof(m) * o.drop, t + dur);
+  if (o.vib) { const l = ac.createOscillator(), lg = ac.createGain(); l.frequency.value = o.vib; lg.gain.value = o.vibAmt || 9; l.connect(lg); lg.connect(osc.detune); l.start(t); l.stop(t + dur + 0.1); }
+  const g = ac.createGain(), v = o.vol || 0.08, a = o.a || 0.006;
+  g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(v, t + a);
+  if (o.hold) g.gain.setValueAtTime(v, t + Math.max(a, dur * o.hold));
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  let node = osc;
+  if (o.lp) { const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.setValueAtTime(o.lp, t); if (o.lp2) f.frequency.exponentialRampToValueAtTime(o.lp2, t + dur); f.Q.value = o.q || 0.8; osc.connect(f); node = f; }
+  node.connect(g); g.connect(Music.bus); osc.start(t); osc.stop(t + dur + 0.05);
+}
+function mNoise(t, dur, vol, freq, type) {
+  const ac = audioCtx;
+  if (!noiseBuf) { noiseBuf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate); const d = noiseBuf.getChannelData(0); for (let k = 0; k < d.length; k++) d[k] = Math.random() * 2 - 1; }
+  const src = ac.createBufferSource(); src.buffer = noiseBuf; src.loop = true;
+  const f = ac.createBiquadFilter(); f.type = type || 'highpass'; f.frequency.value = freq || 6000;
+  const g = ac.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(vol, t + Math.min(0.01, dur * 0.3) + (dur > 1 ? dur * 0.4 : 0)); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  src.connect(f); f.connect(g); g.connect(Music.bus); src.start(t); src.stop(t + dur + 0.05);
+}
+const bell = (t, m, dur, vol) => { mNote(t, m, dur, { type: 'sine', vol }); mNote(t, m + 24, dur * 0.4, { type: 'sine', vol: vol * 0.25 }); mNote(t, m + 31, dur * 0.2, { type: 'sine', vol: vol * 0.12 }); };
+const pad = (t, m, dur, vol, lp) => { for (const dt of [-8, 8]) mNote(t, m, dur, { type: 'sawtooth', vol, a: dur * 0.35, hold: 0.7, lp: lp || 900, detune: dt }); };
+const thump = (t, m, vol) => mNote(t, m, 0.35, { type: 'sine', vol, drop: 0.5 });
+const tick = (t, vol) => mNoise(t, 0.05, vol, 7000, 'highpass');
+const CH = Object.freeze({ Dm: [50, 53, 57], Bb: [46, 50, 53], Gm: [43, 46, 50], A: [45, 49, 52], Am: [45, 48, 52], F: [41, 45, 48], Dm2: [38, 41, 45], E: [40, 44, 47], Em: [40, 43, 47], C: [48, 52, 55], B: [47, 51, 54], Cm: [48, 51, 55], Ab: [44, 48, 51], Fm: [41, 44, 48], G7: [43, 47, 50, 53] });
+function barLine(name, bar, ch, slots, prob, lift) {
+  const r = mulberry(hashStr(name) + (bar % 8) * 7919), pat = new Array(16).fill(0);
+  for (const s of slots) if (r() < prob) { const k = Math.floor(r() * (ch.length + 1)); pat[s] = (k < ch.length ? ch[k] : ch[0] + (r() < 0.5 ? 2 : -2)) + lift; }
+  if (!pat[0]) pat[0] = ch[0] + lift;
+  return pat;
+}
+const TRACKS = {
+  explore: { bpm: 66, prog: ['Dm', 'Bb', 'Gm', 'A'], step(i, t, d) {
+    const s = i % 16, bar = Math.floor(i / 16), ch = CH[this.prog[bar % 4]];
+    if (s === 0) {
+      ch.forEach((m) => pad(t, m, d * 16, 0.022, 700));
+      mNote(t, ch[0] - 12, d * 16, { type: 'sine', vol: 0.12, a: 0.5, hold: 0.8 });
+      this.pat = barLine('explore', bar, ch, [0, 3, 6, 8, 10, 12, 14], 0.55, 24);
+      if (bar % 4 === 3) mNoise(t, d * 16, 0.035, 700, 'bandpass');
+    }
+    if (this.pat[s]) bell(t, this.pat[s], d * 7, 0.055);
+    if (Walk.on) {
+      if (s % 4 === 0) mNote(t, (s % 8 === 0 ? ch[0] : ch[2]) - 12, d * 3, { type: 'triangle', vol: 0.13, lp: 800 });
+      if (s % 4 === 2) tick(t, 0.025);
+    }
+  } },
+  common: { bpm: 112, prog: ['Am', 'F', 'Dm2', 'E'], step(i, t, d) {
+    const s = i % 16, bar = Math.floor(i / 16), ch = CH[this.prog[bar % 4]];
+    if (s === 0) this.pat = barLine('common', bar, ch, [0, 2, 4, 6, 8, 10, 12, 14], 0.72, 12);
+    if (s % 8 === 0) mNote(t, ch[0] - 12, d * 2, { type: 'triangle', vol: 0.28, lp: 1100 });
+    if (s % 8 === 4) mNote(t, ch[2] - 12, d * 2, { type: 'triangle', vol: 0.22, lp: 1100 });
+    if (this.pat[s]) mNote(t, this.pat[s], d * 1.6, { type: 'triangle', vol: 0.13, lp: 3600 });
+    if (s === 0) ch.forEach((m) => pad(t, m, d * 16, 0.012, 1000));
+    if (s % 4 === 2) tick(t, 0.03);
+  } },
+  uncommon: { bpm: 124, prog: ['Em', 'C', 'Am', 'B'], step(i, t, d) {
+    const s = i % 16, bar = Math.floor(i / 16), ch = CH[this.prog[bar % 4]];
+    if (s === 0) { this.pat = barLine('uncommon', bar, ch, [0, 2, 3, 6, 8, 10, 11, 14], 0.78, 12); ch.forEach((m) => pad(t, m, d * 16, 0.014, 1200)); }
+    if (s % 2 === 0) mNote(t, ch[s % 4 === 0 ? 0 : 2] - 12, d * 1.4, { type: 'square', vol: 0.05, lp: 600 });
+    if (s % 8 === 0) thump(t, 36, 0.32);
+    if (s % 2 === 1) tick(t, 0.016);
+    if (this.pat[s]) mNote(t, this.pat[s], d * 1.8, { type: 'square', vol: 0.04, lp: 2000, vib: 6, vibAmt: 6 });
+  } },
+  rare: { bpm: 132, prog: ['Cm', 'Ab', 'Fm', 'G7'], step(i, t, d) {
+    const s = i % 16, bar = Math.floor(i / 16), ch = CH[this.prog[bar % 4]];
+    if (s === 0) ch.slice(0, 3).forEach((m) => pad(t, m, d * 16, 0.02, 1400));
+    const m = ch[s % ch.length] + 12 + (s >= 8 ? 12 : 0);
+    mNote(t, m, d * 0.9, { type: 'sawtooth', vol: 0.032, lp: 500 + s * 140, q: 3 });
+    if (s === 0 || s === 6 || s === 10) thump(t, ch[0] - 24, s ? 0.24 : 0.34);
+    if (s % 2 === 1) tick(t, 0.012);
+    if (bar % 2 === 1 && s === 12) mNoise(t, d * 4, 0.04, 1200, 'bandpass');
+  } },
+  legendary: { bpm: 84, prog: ['Dm', 'Bb', 'Gm', 'A'], step(i, t, d) {
+    const s = i % 16, bar = Math.floor(i / 16), ch = CH[this.prog[bar % 4]];
+    if (s === 0) {
+      ch.forEach((m) => { mNote(t, m, d * 16, { type: 'square', vol: 0.016, lp: 1800, a: 0.08, hold: 0.85 }); mNote(t, m + 12, d * 16, { type: 'square', vol: 0.011, lp: 2400, a: 0.08, hold: 0.85 }); });
+      ch.forEach((m) => mNote(t, m + 12, d * 16, { type: 'sine', vol: 0.03, a: d * 5, hold: 0.7, vib: 5 }));
+      mNote(t, ch[0] - 24, d * 16, { type: 'sine', vol: 0.16, a: 0.05, hold: 0.6 }); thump(t, ch[0] - 24, 0.4);
+      this.pat = barLine('legendary', bar, ch, [0, 4, 6, 8, 12, 14], 0.8, 24);
+    }
+    if (this.pat[s]) bell(t, this.pat[s], d * 8, 0.06);
+    if (s % 2 === 1 && mulberry(i * 31 + 7)() < 0.45) mNote(t, ch[(i >> 1) % ch.length] + 36, d * 2, { type: 'sine', vol: 0.014 });
+  } }
+};
+const TIERS = ['common', 'uncommon', 'rare', 'legendary'];
+function encounterTrack(sp, glow) { return TIERS[Math.min(3, TIERS.indexOf(sp.rar) + (glow ? 1 : 0))]; }
+Music.play = function (name) {
+  Music.want = name;
+  if (!audioCtx || musicLevel() === 0 || !TRACKS[name]) return;
+  if (Music.name === name && Music.timer) return;
+  const now = audioCtx.currentTime;
+  if (Music.bus) { const old = Music.bus; old.gain.cancelScheduledValues(now); old.gain.setTargetAtTime(0.0001, now, 0.25); setTimeout(() => { try { old.disconnect(); } catch (e) { /* gone */ } }, 2500); }
+  Music.bus = audioCtx.createGain(); Music.bus.gain.setValueAtTime(0.0001, now); Music.bus.gain.exponentialRampToValueAtTime(1, now + 0.9); Music.bus.connect(musicOut());
+  Music.track = TRACKS[name]; Music.track.pat = null; Music.name = name; Music.i = 0; Music.next = now + 0.08;
+  if (!Music.timer) Music.timer = setInterval(Music.tick, 40);
+};
+Music.tick = function () {
+  if (!audioCtx || !Music.track) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  const T = Music.track, d = 60 / T.bpm / 4, now = audioCtx.currentTime;
+  if (Music.next < now - 0.5) Music.next = now + 0.05;
+  while (Music.next < now + 0.25) { try { T.step(Music.i, Music.next, d); } catch (e) { /* one bad note never stops the score */ } Music.next += d; Music.i++; }
+};
+Music.stop = function (keepWant) {
+  if (!keepWant) Music.want = '';
+  clearInterval(Music.timer); Music.timer = 0; Music.name = ''; Music.track = null;
+  if (Music.bus && audioCtx) { const old = Music.bus; old.gain.cancelScheduledValues(audioCtx.currentTime); old.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.2); setTimeout(() => { try { old.disconnect(); } catch (e) { /* gone */ } }, 2000); }
+  Music.bus = null;
+};
+
 /* =====================================================================
    MAIN LOOP
    ===================================================================== */
@@ -2087,7 +2218,7 @@ function frame(now) {
   renderer.render(scene, camera);
   if (G.enc) drawEnc(now / 1000); else drawWorldFx(now / 1000);
 }
-document.addEventListener('visibilitychange', () => { if (document.hidden) saveProfile(); else { lastT = performance.now(); if (G.hunting) keepAwake(true); } });
+document.addEventListener('visibilitychange', () => { if (document.hidden) { saveProfile(); Music.stop(true); } else { lastT = performance.now(); if (G.hunting) { keepAwake(true); if (Music.want) Music.play(Music.want); } } });
 
 /* =====================================================================
    SHEETS: catch card, Spookydex, detail, settings
@@ -2207,6 +2338,9 @@ function openSettings() {
     '<div class="howto"><b>How to hunt.</b> Turn around slowly and look for spooks pinned in your room. Arrows at the edge point to spooks you cannot see. Tap a spook, then swipe the lantern up to throw it. Land it inside the shrinking ring for a Nice, Great, or Excellent throw. Spin the lantern in a little circle before you let go for a curveball. Some spooks only come out at night.<br><br><b>Grow.</b> Every catch earns XP and family candy, and your first catch each day doubles the candy. Spend 12 candy to evolve a first stage spook and 36 for a second stage. Send extras home for 1 candy each. Turn on <b>Walk</b> outside and a new spook comes to find you every 100 meters, about 130 steps.</div>' +
     '<div class="set-row"><label>View</label><div class="seg" id="segView"><button data-v="auto">Camera</button><button data-v="backdrop">Spooky yard</button><button data-v="drag">Drag only</button></div><div class="hint">Camera uses your phone camera and motion. Spooky yard skips the camera. Drag only works without motion, which is best on a computer. Changes apply on your next hunt.</div></div>' +
     '<div class="set-row"><label>Sound</label><div class="seg" id="segSound"><button data-m="0">On</button><button data-m="1">Off</button></div></div>' +
+    '<div class="set-row"><label>Music</label><div class="seg" id="segMusic"><button data-v="1">On</button><button data-v="0">Off</button></div><div class="hint">A haunting theme plays while you hunt, a walking bassline joins it on a walk, and every encounter gets music that matches how rare the spook is.</div></div>' +
+    '<div class="set-row"><label for="volMusic">Music volume <span class="vv" id="vvMusic"></span></label><input type="range" class="rng" id="volMusic" min="0" max="100" step="5"></div>' +
+    '<div class="set-row"><label for="volSfx">Effects volume <span class="vv" id="vvSfx"></span></label><input type="range" class="rng" id="volSfx" min="0" max="100" step="5"></div>' +
     '<div class="set-row"><label for="nameInp">Hunter name</label><input class="inp" id="nameInp" maxlength="18" autocomplete="off"></div>' +
     '<div class="set-row"><label>Tutorial</label><button class="ghost-btn" id="tutBtn" style="margin-top:0">Show the throwing tip again</button></div>' +
     '<div class="set-row"><label>Erase</label><button class="danger" id="eraseBtn">Erase this hunter\'s catches</button><div class="hint">Tap twice to erase. This cannot be undone.</div></div>' +
@@ -2217,8 +2351,21 @@ function openSettings() {
   paint();
   const ss = S3.b.querySelector('#segSound');
   const paintS = () => ss.querySelectorAll('button').forEach((b) => b.classList.toggle('on', (b.dataset.m === '1') === !!settings.mute));
-  ss.onclick = (e) => { const b = e.target.closest('button'); if (!b) return; settings.mute = b.dataset.m === '1'; saveSettings(); paintS(); sfx('chime'); };
-  paintS();
+  const sm = S3.b.querySelector('#segMusic');
+  const vm = S3.b.querySelector('#volMusic'), vs = S3.b.querySelector('#volSfx');
+  const paintM = () => {
+    sm.querySelectorAll('button').forEach((b) => b.classList.toggle('on', (b.dataset.v === '1') === !!settings.music));
+    vm.value = Math.round(settings.musicVol * 100); vs.value = Math.round(settings.sfxVol * 100);
+    S3.b.querySelector('#vvMusic').textContent = vm.value + '%'; S3.b.querySelector('#vvSfx').textContent = vs.value + '%';
+    vm.disabled = !settings.music || settings.mute; vs.disabled = !!settings.mute; sm.classList.toggle('dim', !!settings.mute);
+  };
+  ss.onclick = (e) => { const b = e.target.closest('button'); if (!b) return; settings.mute = b.dataset.m === '1'; saveSettings(); paintS(); paintM(); applyVolumes(); sfx('chime'); };
+  sm.onclick = (e) => { const b = e.target.closest('button'); if (!b) return; settings.music = b.dataset.v === '1'; saveSettings(); paintM(); applyVolumes(); };
+  vm.oninput = () => { settings.musicVol = vm.value / 100; S3.b.querySelector('#vvMusic').textContent = vm.value + '%'; applyVolumes(); };
+  vm.onchange = () => saveSettings();
+  vs.oninput = () => { settings.sfxVol = vs.value / 100; S3.b.querySelector('#vvSfx').textContent = vs.value + '%'; applyVolumes(); };
+  vs.onchange = () => { saveSettings(); sfx('chime'); };
+  paintS(); paintM();
   const ni = S3.b.querySelector('#nameInp'); ni.value = profile.name;
   ni.onchange = () => { const v = ni.value.replace(/[^\x20-\x7E]/g, '').trim().slice(0, 18); profile.name = v || 'Hunter'; ni.value = profile.name; saveProfile(); refreshTitle(); };
   S3.b.querySelector('#tutBtn').onclick = () => { settings.tutorial = true; saveSettings(); toast('The throwing tip will show on your next spook'); };
@@ -2293,7 +2440,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 window.addEventListener('pagehide', () => { if (profile) saveProfile(); });
 
 /* test hooks for the smoke test (harmless in production) */
-window.HH = { G, SPECIES, CATCH, spawnOne, startEncounter, launch, get profile() { return profile; }, Store, openDex,
+window.HH = { G, SPECIES, CATCH, spawnOne, startEncounter, launch, get profile() { return profile; }, Store, openDex, Music, TRACKS, encounterTrack, applyVolumes, endEncounter, openSettings,
   xpForLevel, levelFor, rewardCatch, evolveOne, sendHome, questsFor, questEvent, ensureQuests, dayKey, haversine, onPos, Walk, startWalk, stopWalk,
   snapPhoto, photosOf, openGallery, openQuests, openFamily, addHunter, switchHunter, removeHunter, allProfiles, sfx, SFX, settings, finishCatch, saveProfile };
 </script>
