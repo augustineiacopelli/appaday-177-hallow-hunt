@@ -169,6 +169,103 @@ a{color:var(--accent-hi)}
 #busy .sp{width:46px;height:46px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:var(--accent-hi);margin:0 auto 14px;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.sheet,.card,.scrim{animation:none}}
+
+/* Session B: title grid, hunter pill, level */
+.hunter{cursor:pointer}
+.hunter .lv{font-size:.72rem;font-weight:900;background:rgba(255,255,255,.1);color:var(--amber-hi);border-radius:999px;padding:2px 8px;margin-left:2px}
+.tgrid{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.tgrid .ghost-btn{margin-top:0;font-size:.95rem}
+.tgrid .ghost-btn .count{font-size:.85rem}
+.xpbar{height:8px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
+.xpbar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--amber),var(--amber-hi));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.xpcap{font-size:.74rem;color:var(--ink-faint);font-weight:800;margin-top:5px}
+.strip{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:12px}
+.strip .top{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:900}
+.strip .top .av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.85rem}
+.strip .top span{flex:1}
+.strip .top em{font-style:normal;color:var(--amber-hi);font-size:.85rem}
+.album-btn{width:100%;min-height:46px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line);font-weight:800;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px}
+.album-btn svg{width:18px;height:18px}
+
+/* HUD extras */
+.hud-btn.shutter{min-width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.14);border:3px solid #fff;padding:0}
+.hud-btn.shutter span{width:50px;height:50px;border-radius:50%;background:#fff;display:block}
+.hud-btn.shutter:active span{transform:scale(.9)}
+.hud-btn.on{background:var(--amber);border-color:transparent;color:#2a1600}
+.hud-btn.on svg{color:#2a1600}
+.hud-btn{position:relative}
+.hud-btn .dot{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:999px;background:var(--amber);color:#2a1600;font-size:.66rem;font-weight:900;display:grid;place-items:center;padding:0 5px}
+#centerBtn{position:fixed;top:calc(var(--hdr) + var(--safe-t) + 6px);right:calc(10px + var(--safe-r));width:46px;height:46px;min-width:0;border-radius:50%;padding:0}
+#centerBtn svg{width:22px;height:22px}
+#chips{right:calc(64px + var(--safe-r))}
+body.walking #chips,body.walking #centerBtn,body.walking #runBtn,body.walking #encInfo,body.walking #encSnap{transform:translateY(46px)}
+#walkBar{position:fixed;z-index:9;left:0;right:0;top:calc(var(--hdr) + var(--safe-t));min-height:40px;padding:6px calc(12px + var(--safe-r)) 6px calc(12px + var(--safe-l));display:flex;align-items:center;gap:8px;font-weight:800;font-size:.8rem;line-height:1.3;color:#2a1600;background:repeating-linear-gradient(135deg,#ffb347 0 14px,#ffc56a 14px 28px)}
+#walkBar svg{width:18px;height:18px;flex:none}
+#walkBar.fast{background:repeating-linear-gradient(135deg,#ff5a6a 0 14px,#ff7a86 14px 28px);color:#2b0006}
+#encSnap{position:fixed;z-index:9;top:calc(var(--hdr) + var(--safe-t) + 62px);left:calc(12px + var(--safe-l));width:44px;height:44px;border-radius:14px;background:rgba(14,16,36,.8);border:1px solid var(--line);display:grid;place-items:center}
+#encSnap svg{width:20px;height:20px}
+#flash{position:fixed;inset:0;z-index:55;background:#fff;pointer-events:none;opacity:0;transition:opacity .35s}
+#flash.on{opacity:.85;transition:none}
+#lastShot{position:fixed;z-index:12;left:calc(14px + var(--safe-l));bottom:calc(92px + var(--safe-b));width:64px;height:84px;border-radius:12px;border:3px solid #fff;background:#000 center/cover no-repeat;box-shadow:0 8px 24px rgba(0,0,0,.5);animation:pop .3s cubic-bezier(.2,1.4,.4,1)}
+
+/* catch card extras */
+.card .xpline{display:flex;align-items:baseline;justify-content:center;gap:10px;margin:2px 0 8px;font-weight:800;color:var(--ink-dim)}
+.card .xpline b{font-size:1.35rem;color:var(--amber-hi);font-weight:900}
+.card .xpwrap{margin:0 6px 14px;text-align:left}
+.card .lvlup{display:inline-block;margin:4px 0 2px;font-weight:900;font-size:1rem;color:#2a1600;background:linear-gradient(90deg,var(--amber),var(--amber-hi));border-radius:999px;padding:4px 14px}
+
+/* candy and evolution */
+.candy{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:14px}
+.cd-top{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;color:var(--ink-dim);margin-bottom:10px}
+.cd-top b{font-size:1.3rem;color:var(--ink)}
+.cd-top svg{width:26px;height:26px}
+.evo-btn{width:100%;min-height:50px;border-radius:14px;background:linear-gradient(180deg,#8a63e6,#6a45c8);color:#fff;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:8px}
+.evo-btn small,.send-btn small{font-weight:800;opacity:.8;font-size:.78rem}
+.evo-btn[disabled]{background:rgba(255,255,255,.06);color:var(--ink-faint);cursor:default}
+.send-btn{width:100%;min-height:46px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-weight:800;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.send-btn.arm{background:var(--amber);color:#2a1600}
+.candy .hint{text-align:center;margin-top:8px}
+
+/* quests */
+.quest{display:flex;gap:12px;align-items:center;background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px}
+.quest .qi{width:40px;height:40px;flex:none;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.07);font-weight:900;color:var(--ink-dim)}
+.quest .qi svg{width:22px;height:22px}
+.quest.done .qi{background:#2fa36b;color:#fff}
+.quest .qb{flex:1;min-width:0}
+.quest .qt{font-weight:900;margin-bottom:6px;line-height:1.3}
+.quest .qr{font-size:.74rem;font-weight:800;color:var(--amber-hi);margin-top:5px}
+.quest .qp{font-size:.74rem;font-weight:800;color:var(--ink-faint);float:right}
+.quest.done .qt{color:var(--ink-dim)}
+.quest.bonus{border-style:dashed}
+
+/* family board */
+.frow{width:100%;display:flex;align-items:center;gap:10px;background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:10px 10px 10px 12px;margin-bottom:8px;text-align:left}
+.frow.me{border-color:var(--accent-hi);box-shadow:0 0 0 1px var(--accent-hi) inset}
+.frow .rk{width:22px;font-weight:900;color:var(--ink-faint);text-align:center}
+.frow .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#fff;flex:none}
+.frow .fb{flex:1;min-width:0}
+.frow .fn{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frow .fn em{font-style:normal;color:var(--amber-hi);font-size:.8rem;margin-left:4px}
+.frow .fs{font-size:.74rem;color:var(--ink-faint);font-weight:800;margin-top:2px}
+.frow .tag{font-size:.68rem;font-weight:900;background:var(--accent);color:#fff;border-radius:999px;padding:3px 8px}
+.frow .rm{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--ink-faint)}
+.frow .rm.arm{background:#d9364a;color:#fff}
+.frow .rm svg{width:18px;height:18px}
+.addrow{display:flex;gap:8px;margin-top:6px}
+.addrow .inp{flex:1}
+.addrow button{min-width:88px;min-height:46px;border-radius:12px;background:var(--accent);color:#fff;font-weight:900}
+.together{text-align:center;font-weight:800;color:var(--ink-dim);margin:0 0 12px}
+.together b{color:var(--ink)}
+
+/* photos */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.pgrid button{aspect-ratio:3/4;border-radius:10px;background:#000 center/cover no-repeat;border:1px solid var(--line)}
+.pview img{width:100%;border-radius:14px;display:block;margin-bottom:12px}
+.prow{display:flex;gap:8px}
+.prow button{flex:1;min-height:48px;border-radius:14px;font-weight:900;background:rgba(255,255,255,.08)}
+.prow .b1{background:var(--accent);color:#fff}
+.prow .danger{flex:1}
+.empty{text-align:center;color:var(--ink-faint);font-weight:700;padding:24px 10px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -193,6 +290,7 @@ a{color:var(--accent-hi)}
 <div id="chips" class="hidden">
   <span class="chip" id="chipMode"></span>
   <span class="chip" id="chipNear"></span>
+  <span class="chip hidden" id="chipWalk"></span>
   <span class="chip night hidden" id="chipNight">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg> Night spooks
   </span>
@@ -202,13 +300,29 @@ a{color:var(--accent-hi)}
   <button class="hud-btn" id="exitBtn" aria-label="Back to title">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Home
   </button>
-  <button class="hud-btn" id="centerBtn" aria-label="Recenter view">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>Recenter
+  <button class="hud-btn" id="walkBtn" aria-label="Walk mode" aria-pressed="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M10 22l2-7-3-3 1-5 4 3 3 1"/><path d="M9 12l-3 2v4"/><path d="M14 15l2 3v4"/></svg>Walk
+  </button>
+  <button class="hud-btn shutter" id="snapBtn" aria-label="Take a photo"><span></span></button>
+  <button class="hud-btn" id="questBtn" aria-label="Daily quests">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Quests<span class="dot" id="questDot">0/3</span>
   </button>
   <button class="hud-btn primary" id="dexBtn" aria-label="Open Spookydex">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><circle cx="12" cy="10" r="2.5"/></svg>Spookydex
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><circle cx="12" cy="10" r="2.5"/></svg>Dex
+  </button>
+  <button class="hud-btn" id="centerBtn" aria-label="Recenter view" title="Recenter view">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
   </button>
 </div>
+
+<div id="walkBar" class="hidden" role="status">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+  <span id="walkTxt">Walking. Look up and watch where you step.</span>
+</div>
+<button id="encSnap" class="hidden" aria-label="Take a photo of this spook">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+</button>
+<div id="flash"></div>
 
 <button id="runBtn" class="hidden" aria-label="Run away">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>Run
@@ -220,16 +334,30 @@ a{color:var(--accent-hi)}
     <div id="showcase"><canvas id="showCv"></canvas></div>
     <h1>Hallow Hunt</h1>
     <p class="tag">Friendly spooks are hiding all around you. Find them through your camera and catch them with your lantern.</p>
-    <div class="hunter"><span class="av" id="hAv">H</span><span><small>Hunting as</small> <span id="hName">Hunter</span></span></div>
+    <button class="hunter" id="hunterBtn" aria-label="Switch hunter or see the Family board"><span class="av" id="hAv">H</span><span><small>Hunting as</small> <span id="hName">Hunter</span></span><span class="lv" id="hLv">Lv 1</span></button>
     <button class="big-btn" id="startBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 3H8z"/><path d="M7 6h10l-1 13a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M12 11c-1.2 1.4-1.2 3 0 4.5 1.2-1.5 1.2-3.1 0-4.5z" fill="currentColor"/></svg>
       Start Hunt
     </button>
-    <button class="ghost-btn" id="titleDexBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
-      Spookydex <span class="count" id="titleDexCount"></span>
-    </button>
-    <p class="safety">Hallow Hunt asks for motion and camera access so spooks can appear in your room. Nothing leaves your phone. Hunt with a grown up and always watch where you step.</p>
+    <div class="tgrid">
+      <button class="ghost-btn" id="titleDexBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+        Dex <span class="count" id="titleDexCount"></span>
+      </button>
+      <button class="ghost-btn" id="titleQuestBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
+        Quests <span class="count" id="titleQuestCount"></span>
+      </button>
+      <button class="ghost-btn" id="titlePhotoBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        Photos <span class="count" id="titlePhotoCount"></span>
+      </button>
+      <button class="ghost-btn" id="titleFamBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Family <span class="count" id="titleFamCount"></span>
+      </button>
+    </div>
+    <p class="safety">Hallow Hunt asks for motion and camera access so spooks can appear in your room, and for location only when you turn on Walk. Nothing leaves your phone. Hunt with a grown up and always watch where you step.</p>
     <div class="foot">AppADay 177 &middot; <a href="https://augustineiacopelli.github.io/appaday/">See all the apps</a></div>
   </div>
 </section>
@@ -322,10 +450,10 @@ function speciesWeight(sp, night) {
   if (sp.night) w *= night ? 2.2 : 0.55; else w *= night ? 0.8 : 1.2;
   return w;
 }
-function pickSpecies(night, rng) {
+function pickSpecies(night, rng, boost) {
   rng = rng || Math.random;
   let total = 0;
-  const ws = SPECIES.map((s) => { const w = speciesWeight(s, night); total += w; return w; });
+  const ws = SPECIES.map((s) => { const w = speciesWeight(s, night) * (boost && s.rar !== 'common' ? 2 : 1); total += w; return w; });
   let r = rng() * total;
   for (let i = 0; i < SPECIES.length; i++) { r -= ws[i]; if (r <= 0) return SPECIES[i]; }
   return SPECIES[0];
@@ -709,7 +837,13 @@ const Store = (function () {
 })();
 
 function newProfile(name) {
-  return { id: 'p' + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36), name: name || 'Hunter', created: Date.now(), xp: 0, level: 1, candy: {}, caught: [], seen: {}, stats: { throws: 0, hits: 0, catches: 0, fled: 0, nice: 0, great: 0, excellent: 0, curves: 0 }, v: 1 };
+  return { id: 'p' + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36), name: name || 'Hunter', created: Date.now(), xp: 0, level: 1, candy: {}, caught: [], seen: {}, stats: { throws: 0, hits: 0, catches: 0, fled: 0, nice: 0, great: 0, excellent: 0, curves: 0, evolves: 0, sent: 0, walkM: 0, photos: 0, questsDone: 0 }, color: 0, lastCatchDay: '', quests: null, v: 1 };
+}
+function normProfile(p) {
+  const d = newProfile(p.name);
+  p.name = p.name || 'Hunter'; p.xp = p.xp || 0; p.level = p.level || 1; p.candy = p.candy || {}; p.caught = p.caught || []; p.seen = p.seen || {};
+  p.stats = Object.assign(d.stats, p.stats || {}); p.color = p.color || 0; p.lastCatchDay = p.lastCatchDay || ''; p.quests = p.quests || null;
+  return p;
 }
 let profile = null;
 async function loadProfile() {
@@ -722,7 +856,7 @@ async function loadProfile() {
     await Store.put('profiles', profile);
     await Store.put('meta', { key: 'active', value: profile.id });
   }
-  profile.seen = profile.seen || {}; profile.caught = profile.caught || []; profile.stats = profile.stats || newProfile().stats;
+  normProfile(profile);
   if (!Store.usingDB) setTimeout(() => toast('Private mode: catches last until you close the app'), 800);
 }
 let saveQ = Promise.resolve();
@@ -740,7 +874,7 @@ const fx = $('fx'); const fxc = fx.getContext('2d');
 function initThree() {
   if (renderer) return true;
   if (!window.THREE) { toast('Could not load the 3D engine. Check your connection and reload.', 4000); return false; }
-  renderer = new THREE.WebGLRenderer({ canvas: $('gl'), alpha: true, antialias: true });
+  renderer = new THREE.WebGLRenderer({ canvas: $('gl'), alpha: true, antialias: true, preserveDrawingBuffer: true });
   renderer.setClearColor(0x000000, 0);
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(62, 1, 0.1, 100);
@@ -895,17 +1029,17 @@ async function startHunt() {
   if (mode === 'drag') { Drag.yaw = 0; Drag.pitch = 0; } else { recenter(true); }
   if (mode === 'drag' && settings.view !== 'drag') toast('No motion sensor here, so drag to look around the spooky yard.', 3200);
   else if (mode === 'gyro' && settings.view === 'auto') toast('Camera is off, so you are hunting in the spooky yard.', 3200);
-  resize();
+  resize(); keepAwake(true); updateQuestBadges();
   lastT = performance.now();
   if (!rafId) rafId = requestAnimationFrame(frame);
 }
 function endHunt() {
-  G.hunting = false; endEncounter(true);
+  G.hunting = false; endEncounter(true); stopWalk(true); keepAwake(false); hideLastShot();
   for (const cr of G.creatures.slice()) despawn(cr);
   stopCamera();
   window.removeEventListener('deviceorientation', onOrient, true);
   Orient.has = false; Orient.events = 0;
-  ['hud', 'chips', 'runBtn', 'encInfo'].forEach((id) => $(id).classList.add('hidden'));
+  ['hud', 'chips', 'runBtn', 'encInfo', 'encSnap'].forEach((id) => $(id).classList.add('hidden'));
   $('title').classList.remove('hidden');
   fxc.clearRect(0, 0, G.W, G.H);
   if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
@@ -923,13 +1057,14 @@ function updateChips() {
    WORLD: spawning, despawn, edge arrows, taps
    ===================================================================== */
 const MAX_ACTIVE = 4;
-function spawnOne() {
-  const sp = pickSpecies(G.night);
+function spawnOne(opt) {
+  opt = opt || {};
+  const sp = pickSpecies(G.night, null, opt.boost);
   const glow = Math.random() < GLOW_CHANCE;
   const camYaw = cameraYaw();
   let yaw = 0, ok = false;
   for (let tries = 0; tries < 12 && !ok; tries++) {
-    yaw = G.spawned < 2 ? camYaw + rand(-0.45, 0.45) : camYaw + rand(-Math.PI, Math.PI);
+    yaw = G.spawned < 2 || opt.front ? camYaw + rand(-0.45, 0.45) : camYaw + rand(-Math.PI, Math.PI);
     ok = G.creatures.every((c) => Math.abs(Math.atan2(Math.sin(c.yaw - yaw), Math.cos(c.yaw - yaw))) > 0.42);
   }
   const pitch = rand(-0.22, 0.24), dist = rand(3.2, 4.8);
@@ -937,7 +1072,7 @@ function spawnOne() {
   const mat = new THREE.SpriteMaterial({ map: creatureTexture(sp, glow), transparent: true, depthWrite: false, opacity: 0 });
   const sprite = new THREE.Sprite(mat);
   const size = sp.stage === 3 ? 1.25 : sp.stage === 2 ? 1.1 : 0.95;
-  sprite.position.copy(pos); sprite.scale.set(0.01, 0.01, 1);
+  sprite.position.copy(pos); sprite.scale.set(0.01, 0.01, 1); sprite.visible = !G.enc;
   scene.add(sprite);
   const cr = { sp, glow, yaw, pos, sprite, size, age: 0, life: rand(70, 120), phase: rand(0, TAU), fading: false };
   G.creatures.push(cr); G.spawned++;
@@ -1052,7 +1187,8 @@ function startEncounter(cr) {
   };
   resetLantern();
   $('hud').classList.add('hidden'); $('chips').classList.add('hidden');
-  $('runBtn').classList.remove('hidden'); $('encInfo').classList.remove('hidden');
+  $('runBtn').classList.remove('hidden'); $('encInfo').classList.remove('hidden'); $('encSnap').classList.remove('hidden'); hideLastShot();
+  sfx('appear');
   $('encName').textContent = (cr.glow ? 'Glowing ' : '') + sp.name;
   const rr = $('encRar'); rr.textContent = RARITY[sp.rar].label + (caughtCount(sp.id) ? ' \u00b7 caught ' + caughtCount(sp.id) : ' \u00b7 new'); rr.style.color = 'var(--' + sp.rar + ')';
   if (navigator.vibrate) try { navigator.vibrate(20); } catch (e) { /* ignore */ }
@@ -1061,7 +1197,7 @@ function endEncounter(silent) {
   if (!G.enc) return;
   G.enc = null;
   for (const c of G.creatures) if (c.sprite) c.sprite.visible = true;
-  $('runBtn').classList.add('hidden'); $('encInfo').classList.add('hidden');
+  $('runBtn').classList.add('hidden'); $('encInfo').classList.add('hidden'); $('encSnap').classList.add('hidden');
   if (G.hunting && !silent) { $('hud').classList.remove('hidden'); $('chips').classList.remove('hidden'); updateChips(); }
 }
 function lanternHome() { return { x: G.W / 2, y: G.H - Math.max(96, G.H * 0.13) - 20 }; }
@@ -1085,7 +1221,7 @@ function encPointerMove(e) {
     Ptr.pts.push({ x: e.clientX, y: e.clientY, t: now }); if (Ptr.pts.length > 60) Ptr.pts.shift();
   }
   E.lan.x = e.clientX; E.lan.y = e.clientY - 10; E.lan.spin = Ptr.turn;
-  if (!E.lan.curveReady && Math.abs(Ptr.turn) > CURVE_TURN) { E.lan.curveReady = true; popup('Curve ready!', E.lan.x, E.lan.y - 50, '#c9a6ff'); }
+  if (!E.lan.curveReady && Math.abs(Ptr.turn) > CURVE_TURN) { E.lan.curveReady = true; popup('Curve ready!', E.lan.x, E.lan.y - 50, '#c9a6ff'); sfx('curve'); }
 }
 const CURVE_TURN = 4.4;
 function encPointerUp(e, cancel) {
@@ -1114,7 +1250,7 @@ function launch(vx, vy, curveDir) {
   const ax = lx + dirx * (ly - c.y) * 0.9;
   const dur = clamp(0.72 - (reach - 1) * 0.15, 0.48, 0.8);
   E.flight = { lx, ly, ax, ay, t: 0, dur, curve: curveDir, reach };
-  E.throws++; profile.stats.throws++;
+  E.throws++; profile.stats.throws++; sfx('throw');
   if (settings.tutorial) { settings.tutorial = false; saveSettings(); E.hint = false; }
 }
 function popup(text, x, y, col) { G.enc && G.enc.popups.push({ text, x, y, col: col || '#fff', t: 0 }); }
@@ -1151,13 +1287,14 @@ function updateEnc(dt) {
     const per = 0.85, i = Math.floor(E.st / per), f = (E.st % per) / per;
     E.lan.rot = f < 0.6 ? Math.sin(f / 0.6 * TAU) * 0.38 * (i % 2 ? -1 : 1) : 0;
     if (i > E.wob && i <= E.result.wobbles) { E.wob = i; }
+    if (i < E.result.wobbles && E.wobS !== i && f > 0.05) { E.wobS = i; sfx('wobble'); }
     if (i >= E.result.wobbles) {
-      if (E.result.caught) { E.state = 'caught'; E.st = 0; burst(E.lan.x, E.lan.y - 20, '#ffe58a', 30); burst(E.lan.x, E.lan.y - 20, '#9cc4ff', 16); if (navigator.vibrate) try { navigator.vibrate([30, 40, 60]); } catch (e) { /* ignore */ } }
-      else { E.state = 'break'; E.st = 0; burst(E.lan.x, E.lan.y - 20, '#ffffff', 18); popup(['Oh no!', 'Almost!', 'So close!'][Math.min(2, E.result.wobbles)], G.W / 2, G.H * 0.22, '#ff9b3d'); }
+      if (E.result.caught) { E.state = 'caught'; E.st = 0; sfx('catch'); burst(E.lan.x, E.lan.y - 20, '#ffe58a', 30); burst(E.lan.x, E.lan.y - 20, '#9cc4ff', 16); if (navigator.vibrate) try { navigator.vibrate([30, 40, 60]); } catch (e) { /* ignore */ } }
+      else { E.state = 'break'; E.st = 0; sfx('break'); burst(E.lan.x, E.lan.y - 20, '#ffffff', 18); popup(['Oh no!', 'Almost!', 'So close!'][Math.min(2, E.result.wobbles)], G.W / 2, G.H * 0.22, '#ff9b3d'); }
     }
   } else if (E.state === 'break') {
     if (E.st > 0.55) {
-      if (CATCH.flees(E.sp.flee, Math.random)) { E.state = 'flee'; E.st = 0; profile.stats.fled++; saveProfile(); }
+      if (CATCH.flees(E.sp.flee, Math.random)) { E.state = 'flee'; E.st = 0; profile.stats.fled++; saveProfile(); sfx('flee'); }
       else { E.state = 'aim'; E.st = 0; resetLantern(); }
     }
   } else if (E.state === 'flee') {
@@ -1174,7 +1311,7 @@ function resolveThrow() {
   const E = G.enc, F = E.flight, c = encCenter(E);
   const dx = F.ax - c.x, dy = F.ay - c.y;
   const hit = Math.abs(dx) <= E.R * 0.95 && Math.abs(dy) <= E.R * 1.05;
-  if (!hit) { E.flight = null; E.state = 'miss'; E.st = 0; popup(F.reach < REACH_MIN ? 'Too short' : F.reach > REACH_MAX ? 'Too far' : 'Missed', G.W / 2, G.H * 0.62, '#c9d3f5'); return; }
+  if (!hit) { sfx('miss'); E.flight = null; E.state = 'miss'; E.st = 0; popup(F.reach < REACH_MIN ? 'Too short' : F.reach > REACH_MAX ? 'Too far' : 'Missed', G.W / 2, G.H * 0.62, '#c9d3f5'); return; }
   const r = RING_MIN_FLOOR(1 - E.ringT / RING_T);
   const inRing = Math.hypot(dx, dy) <= E.R * r * 1.05;
   const grade = inRing ? CATCH.gradeFor(r) : '';
@@ -1182,6 +1319,7 @@ function resolveThrow() {
   const p = CATCH.probability(E.sp.base, { inRing, ring: r, curve, glow: E.glow });
   E.result = CATCH.wobbles(p, Math.random); E.grade = grade; E.curve = curve; E.p = p;
   profile.stats.hits++; if (grade) profile.stats[grade]++; if (curve) profile.stats.curves++;
+  sfx('hit'); questEvent('hit', { inRing, grade, curve });
   let y = G.H * 0.2;
   if (grade) { popup({ nice: 'Nice!', great: 'Great!', excellent: 'Excellent!' }[grade], G.W / 2, y, grade === 'excellent' ? '#ffd65a' : grade === 'great' ? '#7fe0ff' : '#9cf0a8'); y += 40; }
   if (curve) popup('Curveball!', G.W / 2, y, '#c9a6ff');
@@ -1196,9 +1334,11 @@ async function finishCatch() {
   const E = G.enc; const sp = E.sp; const first = caughtCount(sp.id) === 0;
   const entry = { u: Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36), s: sp.id, g: E.glow ? 1 : 0, t: Date.now(), gr: E.grade || '', cv: E.curve ? 1 : 0 };
   profile.caught.push(entry); profile.stats.catches++;
+  const rw = rewardCatch(sp, E.glow, first, E.grade, E.curve);
+  questEvent('catch', { sp });
   await saveProfile();
   const cr = E.cr; endEncounter(true); despawn(cr);
-  showCatchCard(sp, E.glow, first, E.grade, E.curve);
+  showCatchCard(sp, E.glow, first, E.grade, E.curve, rw);
 }
 
 function drawLantern(c, x, y, s, rot, alpha, glowCol, lit) {
@@ -1271,6 +1411,485 @@ function drawEnc(t) {
 function hexA(hex, a) { const n = parseInt(hex.slice(1), 16); return 'rgba(' + (n >> 16 & 255) + ',' + (n >> 8 & 255) + ',' + (n & 255) + ',' + a + ')'; }
 
 /* =====================================================================
+   SESSION B: progression, quests, walk, photos, hunters, sound
+   ===================================================================== */
+const FAMILY = Object.freeze({ wisp: 'Wisp', pumpkin: 'Pumpkin', goblin: 'Goblin', bat: 'Bat', spider: 'Spider', cat: 'Cat', skeleton: 'Skeleton', candle: 'Candle', owl: 'Owl', mummy: 'Mummy', moth: 'Moth' });
+const AV_COLORS = ['#276EB7', '#e8781a', '#7e57d6', '#2fa36b', '#d9364a', '#c99a20', '#1aa3b8', '#c4508f'];
+function avColor(p) { return AV_COLORS[(p && p.color || 0) % AV_COLORS.length]; }
+function initial(name) { return (String(name || 'H').charAt(0) || 'H').toUpperCase(); }
+function pad2(n) { return String(n).padStart(2, '0'); }
+function dayKey(d) { d = d || new Date(); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+
+/* notes: toasts that queue instead of overwriting each other */
+const Notes = { q: [], busy: false };
+function queueNote(msg) {
+  Notes.q.push(msg);
+  if (Notes.busy) return;
+  (function next() { const m = Notes.q.shift(); if (!m) { Notes.busy = false; return; } Notes.busy = true; toast(m, 2600); setTimeout(next, 2800); })();
+}
+
+/* ---------- XP, levels, candy ---------- */
+const LEVEL_CAP = 30;
+const XP = Object.freeze({ catch: 100, newSp: 500, glow: 300, nice: 20, great: 60, excellent: 120, curve: 20, firstDay: 300, evolve: 500, quest: 250, allQuests: 500, walk: 25 });
+const CANDY = Object.freeze({ catch: 3, glow: 3, send: 1, quest: 4 });
+const EVO_COST = Object.freeze({ 1: 12, 2: 36 });
+function xpForLevel(L) { if (L <= 1) return 0; const n = Math.min(L, LEVEL_CAP) - 1; return 300 * n + 75 * n * (n - 1); }
+function levelFor(xp) { let L = 1; while (L < LEVEL_CAP && xp >= xpForLevel(L + 1)) L++; return L; }
+function levelProgress(p) {
+  p = p || profile; const L = levelFor(p.xp);
+  if (L >= LEVEL_CAP) return { L, cur: 0, need: 0, frac: 1, max: true };
+  const a = xpForLevel(L), b = xpForLevel(L + 1);
+  return { L, cur: p.xp - a, need: b - a, frac: clamp((p.xp - a) / (b - a), 0, 1), max: false };
+}
+function levelCaption(lp) { return lp.max ? 'Level ' + LEVEL_CAP + ', the top level. Every catch still counts.' : 'Level ' + lp.L + ' \u00b7 ' + lp.cur.toLocaleString() + ' of ' + lp.need.toLocaleString() + ' XP to level ' + (lp.L + 1); }
+function awardXP(n, quiet) {
+  const before = profile.level; profile.xp += Math.round(n); profile.level = levelFor(profile.xp);
+  if (profile.level > before) { sfx('level'); if (!quiet) queueNote('Level up! You are now level ' + profile.level); return profile.level; }
+  return 0;
+}
+function addCandy(fam, n) { profile.candy[fam] = (profile.candy[fam] || 0) + n; }
+function rewardCatch(sp, glow, first, grade, curve) {
+  const lp0 = levelProgress(), before = lp0.frac, beforeL = lp0.L;
+  let xp = XP.catch;
+  if (first) xp += XP.newSp;
+  if (glow) xp += XP.glow;
+  if (grade) xp += XP[grade];
+  if (curve) xp += XP.curve;
+  let candy = CANDY.catch + (glow ? CANDY.glow : 0);
+  const today = dayKey(); let firstDay = false;
+  if (profile.lastCatchDay !== today) { firstDay = true; profile.lastCatchDay = today; xp += XP.firstDay; candy *= 2; }
+  addCandy(sp.fam, candy);
+  const lvl = awardXP(xp, true);
+  return { xp, candy, firstDay, lvl, before, beforeL };
+}
+
+/* ---------- evolution and Send Home ---------- */
+function evolveCost(sp) { return sp.evo ? EVO_COST[sp.stage] || 0 : 0; }
+function canEvolve(sp) { const c = evolveCost(sp); return c > 0 && caughtCount(sp.id) > 0 && (profile.candy[sp.fam] || 0) >= c; }
+function evolveOne(sp) {
+  if (!canEvolve(sp)) return null;
+  const to = SPECIES_BY_ID[sp.evo]; const firstTo = caughtCount(to.id) === 0;
+  const mine = profile.caught.filter((c) => c.s === sp.id);
+  const entry = mine.find((c) => c.g) || mine[mine.length - 1];
+  profile.candy[sp.fam] -= evolveCost(sp);
+  entry.s = to.id; entry.ev = (entry.ev || 0) + 1;
+  profile.seen[to.id] = (profile.seen[to.id] || 0) + 1;
+  profile.stats.evolves++;
+  const xp = XP.evolve + (firstTo ? XP.newSp : 0);
+  const lvl = awardXP(xp, true);
+  questEvent('evolve');
+  saveProfile();
+  return { from: sp, to, glow: !!entry.g, firstTo, xp, lvl };
+}
+function sendHome(sp) {
+  const mine = profile.caught.filter((c) => c.s === sp.id);
+  if (mine.length < 2) return null;
+  const byAge = (a, b) => a.t - b.t;
+  const pick = mine.filter((c) => !c.g).sort(byAge)[0] || mine.slice().sort(byAge)[0];
+  profile.caught.splice(profile.caught.indexOf(pick), 1);
+  addCandy(sp.fam, CANDY.send); profile.stats.sent++;
+  questEvent('send'); saveProfile();
+  return { glow: !!pick.g, left: mine.length - 1 };
+}
+const CANDY_SVG = '<svg viewBox="0 0 32 32"><path d="M9 16 3 11v10z" fill="#ffb347" stroke="#15102a" stroke-width="1.6" stroke-linejoin="round"/><path d="M23 16l6-5v10z" fill="#ffb347" stroke="#15102a" stroke-width="1.6" stroke-linejoin="round"/><circle cx="16" cy="16" r="8" fill="#ff7a3d" stroke="#15102a" stroke-width="1.6"/><path d="M11 13c3 2 7 2 10 0M11 19c3-2 7-2 10 0" stroke="#ffe0b8" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>';
+function candyBlock(sp, n) {
+  const have = profile.candy[sp.fam] || 0, cost = evolveCost(sp);
+  let h = '<div class="candy"><div class="cd-top">' + CANDY_SVG + '<b>' + have + '</b> ' + FAMILY[sp.fam] + ' candy</div>';
+  if (cost) {
+    const to = SPECIES_BY_ID[sp.evo]; const shown = caughtCount(to.id) > 0 || profile.seen[to.id] ? to.name : 'the next stage';
+    const ok = n > 0 && have >= cost;
+    h += '<button class="evo-btn"' + (ok ? '' : ' disabled') + '>Evolve to ' + esc(shown) + ' <small>' + cost + ' candy</small></button>';
+    h += '<div class="hint">' + (n === 0 ? 'Catch one first, then feed it candy to evolve it.' : have >= cost ? 'Evolving changes one of your ' + esc(sp.name) + 's. A glowing one evolves first and stays glowing.' : 'Collect ' + (cost - have) + ' more ' + FAMILY[sp.fam] + ' candy by catching any ' + FAMILY[sp.fam] + ' family spook.') + '</div>';
+  } else {
+    h += '<div class="hint">' + (sp.stage > 1 ? 'This is the final stage of the family.' : 'This spook does not evolve, but its candy still counts.') + '</div>';
+  }
+  if (n > 1) h += '<button class="send-btn">Send one home <small>+' + CANDY.send + ' candy</small></button>';
+  return h + '</div>';
+}
+function showEvolveCard(res, onDone) {
+  const card = el('div', 'card');
+  card.innerHTML = '<div class="kick">Evolution!</div>' + (res.lvl ? '<div class="lvlup">Level up! You are level ' + res.lvl + '</div>' : '') + '<canvas></canvas><h3>' + (res.glow ? 'Glowing ' : '') + esc(res.to.name) + '</h3><div class="sub">Your ' + esc(res.from.name) + ' evolved into ' + esc(res.to.name) + '</div>' +
+    '<div class="xpline"><b>+' + res.xp.toLocaleString() + ' XP</b></div><div class="badges"></div><div class="row"><button class="b1" data-a="ok">Meet ' + esc(res.to.name) + '</button></div>';
+  const bd = card.querySelector('.badges');
+  if (res.firstTo) bd.appendChild(el('span', 'bd new', 'New to your Spookydex'));
+  bd.appendChild(el('span', 'bd', RARITY[res.to.rar].label));
+  const cv = card.querySelector('canvas');
+  let stop = false;
+  const s = openScrim(card, true, () => { stop = true; onDone && onDone(res.to); });
+  card.querySelector('[data-a=ok]').onclick = () => closeScrim(s, () => { stop = true; onDone && onDone(res.to); });
+  sfx('evolve');
+  const A = creatureImage(res.from, res.glow).canvas, B = creatureImage(res.to, res.glow).canvas, SA = silhouette(A), SB = silhouette(B);
+  const t0 = performance.now();
+  (function draw(now) {
+    if (stop || !cv.isConnected) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2), w = cv.clientWidth || 190; if (cv.width !== Math.round(w * dpr)) cv.width = cv.height = Math.round(w * dpr);
+    const c = cv.getContext('2d'), W = cv.width, k = (now - t0) / 1000; c.clearRect(0, 0, W, W);
+    const pulse = 1 + 0.06 * Math.sin(k * 14);
+    const drawAt = (img, sc, a) => { c.save(); c.globalAlpha = a; c.translate(W / 2, W / 2); c.scale(sc, sc); c.drawImage(img, -W / 2, -W / 2, W, W); c.restore(); };
+    if (k < 0.5) drawAt(A, 1, 1);
+    else if (k < 1.6) { const sw = Math.floor((k - 0.5) * (4 + (k - 0.5) * 10)) % 2; drawAt(sw ? SB : SA, pulse, 1); }
+    else { drawAt(B, 1, 1); }
+    if (k > 1.5 && k < 2.1) { const f = 1 - Math.abs(k - 1.6) / 0.5; const g = c.createRadialGradient(W / 2, W / 2, 2, W / 2, W / 2, W / 2); g.addColorStop(0, 'rgba(255,255,240,' + f + ')'); g.addColorStop(1, 'rgba(255,230,160,0)'); c.fillStyle = g; c.fillRect(0, 0, W, W); }
+    if (k < 2.2) requestAnimationFrame(draw);
+  })(t0);
+}
+
+/* ---------- daily quests (seeded by date, so the family shares them) ---------- */
+const QUEST_FAMS = ['wisp', 'pumpkin', 'goblin', 'bat', 'spider', 'cat', 'candle'];
+const QUEST_KINDS = [
+  { k: 'catch', w: 0, ns: [3, 5, 7], txt: (n) => 'Catch ' + n + ' spooks' },
+  { k: 'fam', w: 3, ns: [2, 3], txt: (n, f) => 'Catch ' + n + ' ' + FAMILY[f] + ' family spooks' },
+  { k: 'ring', w: 3, ns: [3, 5], txt: (n) => 'Land ' + n + ' throws inside the ring' },
+  { k: 'great', w: 2, ns: [2, 3], txt: (n) => 'Make ' + n + ' Great or Excellent throws' },
+  { k: 'excellent', w: 1, ns: [1], txt: () => 'Make an Excellent throw' },
+  { k: 'curve', w: 2, ns: [2, 3], txt: (n) => 'Land ' + n + ' curveballs' },
+  { k: 'send', w: 1, ns: [1, 2], txt: (n) => 'Send ' + n + ' spook' + (n === 1 ? '' : 's') + ' home' },
+  { k: 'photo', w: 2, ns: [1, 2], txt: (n) => 'Snap ' + n + ' spook photo' + (n === 1 ? '' : 's') }
+];
+function hashStr(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function questsFor(day) {
+  const r = mulberry(hashStr('hallowhunt:' + day));
+  const pick = (arr) => arr[Math.floor(r() * arr.length)];
+  const mk = (K) => { const n = pick(K.ns); const f = K.k === 'fam' ? pick(QUEST_FAMS) : null; const rf = f || pick(QUEST_FAMS); return { k: K.k, n, f, rf, text: K.txt(n, f) }; };
+  const out = [mk(QUEST_KINDS[0])]; const used = { catch: true };
+  while (out.length < 3) {
+    const pool = QUEST_KINDS.filter((K) => K.w > 0 && !used[K.k]);
+    let tot = 0; for (const K of pool) tot += K.w;
+    let x = r() * tot, K = pool[pool.length - 1];
+    for (const P of pool) { x -= P.w; if (x <= 0) { K = P; break; } }
+    used[K.k] = true; out.push(mk(K));
+  }
+  return out;
+}
+function ensureQuests(p) {
+  p = p || profile; const d = dayKey();
+  if (!p.quests || p.quests.day !== d) p.quests = { day: d, prog: [0, 0, 0], done: [0, 0, 0], bonus: 0 };
+  return questsFor(d);
+}
+function questEvent(type, data) {
+  if (!profile) return;
+  const qs = ensureQuests(); const Q = profile.quests; data = data || {};
+  qs.forEach((q, i) => {
+    if (Q.done[i]) return;
+    let inc = 0;
+    if (type === 'catch') { if (q.k === 'catch') inc = 1; else if (q.k === 'fam' && data.sp && data.sp.fam === q.f) inc = 1; }
+    else if (type === 'hit') {
+      if (q.k === 'ring' && data.inRing) inc = 1;
+      else if (q.k === 'great' && (data.grade === 'great' || data.grade === 'excellent')) inc = 1;
+      else if (q.k === 'excellent' && data.grade === 'excellent') inc = 1;
+      else if (q.k === 'curve' && data.curve) inc = 1;
+    } else if (q.k === type) inc = 1;
+    if (!inc) return;
+    Q.prog[i] = Math.min(q.n, Q.prog[i] + inc);
+    if (Q.prog[i] >= q.n) completeQuest(q, i);
+  });
+  updateQuestBadges();
+}
+function completeQuest(q, i) {
+  const Q = profile.quests; Q.done[i] = 1; profile.stats.questsDone++;
+  addCandy(q.rf, CANDY.quest);
+  let lvl = awardXP(XP.quest, true);
+  let msg = 'Quest done: ' + q.text + '. +' + XP.quest + ' XP and ' + CANDY.quest + ' ' + FAMILY[q.rf] + ' candy';
+  if (Q.done.every(Boolean) && !Q.bonus) { Q.bonus = 1; lvl = awardXP(XP.allQuests, true) || lvl; queueNote(msg); msg = 'All three quests done! Bonus +' + XP.allQuests + ' XP'; }
+  sfx('quest');
+  queueNote(msg + (lvl ? '. Level up to ' + lvl + '!' : ''));
+}
+function questsDoneToday(p) { p = p || profile; return p.quests && p.quests.day === dayKey() ? p.quests.done.filter(Boolean).length : 0; }
+function updateQuestBadges() {
+  if (!profile) return;
+  const n = questsDoneToday() + '/3';
+  $('questDot').textContent = n; $('titleQuestCount').textContent = n;
+}
+const QUEST_ICONS = { catch: 'L', fam: 'F', ring: 'O', great: 'G', excellent: 'E', curve: 'C', send: 'H', photo: 'P' };
+function openQuests() {
+  const qs = ensureQuests(); const Q = profile.quests;
+  const S = sheet("Today's quests", profile.name + ' \u00b7 new quests at midnight');
+  const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>';
+  let h = '';
+  qs.forEach((q, i) => {
+    const d = !!Q.done[i];
+    h += '<div class="quest' + (d ? ' done' : '') + '"><div class="qi">' + (d ? check : (i + 1)) + '</div><div class="qb"><div class="qt">' + esc(q.text) + '</div><div class="xpbar"><i style="width:' + Math.round(Q.prog[i] / q.n * 100) + '%"></i></div><div class="qr"><span class="qp">' + Q.prog[i] + ' / ' + q.n + '</span>+' + XP.quest + ' XP &middot; ' + CANDY.quest + ' ' + FAMILY[q.rf] + ' candy</div></div></div>';
+  });
+  h += '<div class="quest bonus' + (Q.bonus ? ' done' : '') + '"><div class="qi">' + (Q.bonus ? check : '+') + '</div><div class="qb"><div class="qt">Finish all three</div><div class="qr">Bonus +' + XP.allQuests + ' XP</div></div></div>';
+  h += '<p class="hint" style="text-align:center">Everyone in the family gets the same three quests today, so you can race each other on the Family board.</p>';
+  S.b.innerHTML = h;
+  const s = openScrim(S.sh, false, resumeHunt); S.x.onclick = () => closeScrim(s, resumeHunt);
+  if (G.hunting) { $('hud').classList.add('hidden'); $('chips').classList.add('hidden'); }
+}
+
+/* ---------- Walk mode: watchPosition, haversine, speed cap ---------- */
+const WALK_STEP_M = 100, WALK_MAX_SPEED = 3.0, WALK_MAX_ACC = 35, STEP_M = 0.76;
+const Walk = { on: false, id: null, last: null, prev: null, acc: 0, session: 0, fast: false, fix: false, spawns: 0 };
+function haversine(a, b) {
+  const R = 6371000, D = Math.PI / 180;
+  const dLat = (b.lat - a.lat) * D, dLon = (b.lon - a.lon) * D;
+  const h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a.lat * D) * Math.cos(b.lat * D) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+function toggleWalk() { if (Walk.on) stopWalk(); else startWalk(); }
+function startWalk() {
+  if (!navigator.geolocation) { toast('This browser cannot share location, so Walk is not available here.', 3200); return; }
+  Object.assign(Walk, { on: true, last: null, prev: null, acc: 0, session: 0, fast: false, fix: false, spawns: 0 });
+  try { Walk.id = navigator.geolocation.watchPosition(onPos, onPosErr, { enableHighAccuracy: true, maximumAge: 2000, timeout: 30000 }); } catch (e) { onPosErr({ code: 2 }); return; }
+  document.body.classList.add('walking');
+  $('walkBar').classList.remove('hidden'); $('chipWalk').classList.remove('hidden');
+  $('walkBtn').classList.add('on'); $('walkBtn').setAttribute('aria-pressed', 'true');
+  updateWalkUI();
+  toast('Walk is on. A new spook finds you every 100 meters.', 3000);
+}
+function stopWalk(quiet) {
+  const was = Walk.on;
+  if (Walk.id != null) { try { navigator.geolocation.clearWatch(Walk.id); } catch (e) { /* ignore */ } }
+  Walk.on = false; Walk.id = null;
+  document.body.classList.remove('walking');
+  $('walkBar').classList.add('hidden'); $('walkBar').classList.remove('fast'); $('chipWalk').classList.add('hidden');
+  $('walkBtn').classList.remove('on'); $('walkBtn').setAttribute('aria-pressed', 'false');
+  if (was) { saveProfile(); if (!quiet) toast('Walk is off. You walked ' + fmtWalk(Walk.session) + '.'); }
+}
+function onPosErr(err) {
+  const denied = err && err.code === 1;
+  stopWalk(true);
+  toast(denied ? 'Location is blocked, so Walk cannot count your steps. You can allow it in your browser settings.' : 'Could not find your location. Try Walk again outside.', 3800);
+}
+function fmtWalk(m) { const mi = m / 1609.344; return mi >= 0.1 ? mi.toFixed(2) + ' mi' : Math.round(m / STEP_M) + ' steps'; }
+function onPos(pos) {
+  if (!Walk.on) return;
+  const c = pos.coords; const p = { lat: c.latitude, lon: c.longitude, t: pos.timestamp || Date.now() };
+  if (!(c.accuracy <= WALK_MAX_ACC)) { Walk.fix = false; updateWalkUI(); return; }
+  Walk.fix = true;
+  let v = c.speed != null && c.speed >= 0 ? c.speed : -1;
+  if (Walk.prev && v < 0) { const dt = (p.t - Walk.prev.t) / 1000; if (dt > 0.5) v = haversine(Walk.prev, p) / dt; }
+  Walk.prev = p;
+  if (!Walk.last) { Walk.last = p; updateWalkUI(); return; }
+  const d = haversine(Walk.last, p);
+  if (v > WALK_MAX_SPEED) { Walk.fast = true; Walk.last = p; updateWalkUI(); return; }
+  Walk.fast = false;
+  if (d > 250) { Walk.last = p; updateWalkUI(); return; }
+  if (d < Math.max(5, c.accuracy * 0.5)) { updateWalkUI(); return; }
+  Walk.last = p; Walk.acc += d; Walk.session += d; profile.stats.walkM += d;
+  while (Walk.acc >= WALK_STEP_M) { Walk.acc -= WALK_STEP_M; walkSpawn(); }
+  updateWalkUI();
+}
+function walkSpawn() {
+  Walk.spawns++;
+  awardXP(XP.walk);
+  if (!G.hunting) return;
+  if (G.creatures.length >= MAX_ACTIVE) { const old = G.creatures.filter((c) => !G.enc || c !== G.enc.cr).sort((a, b) => b.age - a.age)[0]; if (old) despawn(old); }
+  const cr = spawnOne({ boost: true, front: true });
+  sfx('chime');
+  queueNote('You walked 100 meters. A ' + (cr.glow ? 'glowing ' : '') + 'spook came to find you! +' + XP.walk + ' XP');
+  saveProfile();
+}
+function updateWalkUI() {
+  if (!Walk.on) return;
+  const bar = $('walkBar'); bar.classList.toggle('fast', Walk.fast);
+  $('walkTxt').textContent = Walk.fast ? 'Too fast for spooks. Slow down to a walk and never hunt from a car or bike.' : 'Walking. Look up from your screen and watch where you step.';
+  const left = Math.max(1, Math.round((WALK_STEP_M - Walk.acc) / STEP_M));
+  $('chipWalk').innerHTML = Walk.fix ? '<b>' + fmtWalk(Walk.session) + '</b> walked \u00b7 next spook in ' + left + ' steps' : 'Finding your location...';
+}
+
+/* ---------- Photo mode ---------- */
+const PHOTO_CAP = 80;
+let lastShotT = 0;
+function photosOf(pid) { return Store.all('photos').then((ps) => ps.filter((x) => x.profile === pid).sort((a, b) => b.t - a.t)).catch(() => []); }
+function drawCover(c, src, sw, sh, dw, dh) { const k = Math.max(dw / sw, dh / sh); const w = sw * k, h = sh * k; c.drawImage(src, (dw - w) / 2, (dh - h) / 2, w, h); }
+async function snapPhoto() {
+  if (!G.hunting || !renderer) return null;
+  const mine = await photosOf(profile.id);
+  if (mine.length >= PHOTO_CAP) { toast('Your album is full. Delete a few photos to make room.'); return null; }
+  const W = G.W, H = G.H, sc = Math.min(2, 1600 / Math.max(W, H), G.dpr || 1);
+  const cw = Math.round(W * sc), ch = Math.round(H * sc);
+  const cv = document.createElement('canvas'); cv.width = cw; cv.height = ch; const c = cv.getContext('2d');
+  c.fillStyle = '#05060f'; c.fillRect(0, 0, cw, ch);
+  const v = $('cam');
+  if (G.mode === 'magic' && camStream && v.videoWidth) { try { drawCover(c, v, v.videoWidth, v.videoHeight, cw, ch); } catch (e) { /* frame not ready */ } }
+  renderer.render(scene, camera);
+  c.drawImage(renderer.domElement, 0, 0, cw, ch);
+  if (G.enc) c.drawImage(fx, 0, 0, cw, ch);
+  const names = G.enc ? [(G.enc.glow ? 'Glowing ' : '') + G.enc.sp.name] : G.creatures.filter((cr) => { const s = screenOf(cr); return s.front && s.x > 0 && s.x < W && s.y > 0 && s.y < H; }).map((cr) => cr.sp.name);
+  stampPhoto(c, cw, ch, names);
+  let data = '';
+  try { data = cv.toDataURL('image/jpeg', 0.85); } catch (e) { toast('Could not save that photo on this device.'); return null; }
+  const rec = { id: 'ph' + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36), profile: profile.id, t: Date.now(), w: cw, h: ch, data, spooks: names };
+  await Store.put('photos', rec);
+  profile.stats.photos++;
+  sfx('shutter');
+  const f = $('flash'); f.classList.add('on'); requestAnimationFrame(() => requestAnimationFrame(() => f.classList.remove('on')));
+  questEvent('photo'); saveProfile();
+  if (!G.enc) showLastShot(rec); else toast('Photo saved to your album');
+  return rec;
+}
+function stampPhoto(c, w, h, names) {
+  const u = Math.max(w, h) / 900;
+  const g = c.createLinearGradient(0, h - 120 * u, 0, h); g.addColorStop(0, 'rgba(5,6,16,0)'); g.addColorStop(1, 'rgba(5,6,16,0.85)');
+  c.fillStyle = g; c.fillRect(0, h - 120 * u, w, 120 * u);
+  c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+  c.font = Math.round(38 * u) + 'px Creepster, Nunito, cursive'; c.fillStyle = '#f4f1ff'; c.shadowColor = 'rgba(90,155,224,0.8)'; c.shadowBlur = 10 * u;
+  c.fillText('Hallow Hunt', 18 * u, h - 52 * u); c.shadowBlur = 0;
+  c.font = '800 ' + Math.round(16 * u) + 'px Nunito, sans-serif'; c.fillStyle = 'rgba(230,236,255,0.92)';
+  const when = new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  const who = names.length ? names.slice(0, 3).join(', ') + ' with ' : '';
+  c.fillText((who + profile.name + ' \u00b7 ' + when).slice(0, 70), 18 * u, h - 24 * u);
+  c.textAlign = 'right'; c.font = '900 ' + Math.round(13 * u) + 'px Nunito, sans-serif'; c.fillStyle = 'rgba(255,210,122,0.95)';
+  c.fillText('AppADay 177', w - 16 * u, h - 24 * u);
+}
+function showLastShot(rec) {
+  hideLastShot();
+  const b = el('button', ''); b.id = 'lastShot'; b.setAttribute('aria-label', 'Open photo album'); b.style.backgroundImage = 'url(' + rec.data + ')';
+  b.onclick = () => { hideLastShot(); openGallery(rec.id); };
+  document.body.appendChild(b); lastShotT = setTimeout(hideLastShot, 4000);
+}
+function hideLastShot() { clearTimeout(lastShotT); detach($('lastShot')); }
+async function openGallery(openId) {
+  const ps = await photosOf(profile.id);
+  const S = sheet('Photo album', profile.name + ' \u00b7 ' + ps.length + ' photo' + (ps.length === 1 ? '' : 's'));
+  if (!ps.length) S.b.innerHTML = '<div class="empty">No photos yet. While you hunt, tap the round shutter button to snap the spooks around you, or the camera button during an encounter.</div>';
+  else {
+    const grid = el('div', 'pgrid'); S.b.appendChild(grid);
+    for (const p of ps) { const b = el('button', ''); b.style.backgroundImage = 'url(' + p.data + ')'; b.setAttribute('aria-label', 'Photo from ' + new Date(p.t).toLocaleString()); b.onclick = () => openPhoto(p, s); grid.appendChild(b); }
+  }
+  const done = () => resumeHunt();
+  const s = openScrim(S.sh, false, done); S.x.onclick = () => closeScrim(s, done);
+  if (G.hunting) { $('hud').classList.add('hidden'); $('chips').classList.add('hidden'); }
+  if (openId) { const p = ps.find((x) => x.id === openId); if (p) openPhoto(p, s); }
+}
+function dataToBlob(data) { const [head, b64] = data.split(','); const mime = (head.match(/:(.*?);/) || [])[1] || 'image/jpeg'; const bin = atob(b64); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return new Blob([u], { type: mime }); }
+function openPhoto(p, galleryScrim) {
+  const when = new Date(p.t);
+  const S = sheet((p.spooks && p.spooks.length ? p.spooks.slice(0, 2).join(' and ') : 'Spooky photo'), when.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' at ' + when.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }));
+  S.b.innerHTML = '<div class="pview"><img alt="Hallow Hunt photo"></div><div class="prow"><button class="b1" data-a="share">Share</button><button data-a="save">Save</button><button class="danger" data-a="del">Delete</button></div>';
+  S.b.querySelector('img').src = p.data;
+  const s = openScrim(S.sh, false); S.x.onclick = () => closeScrim(s);
+  const fname = 'hallow-hunt-' + dayKey(when) + '-' + p.id.slice(-4) + '.jpg';
+  const share = S.b.querySelector('[data-a=share]');
+  let file = null; try { file = new File([dataToBlob(p.data)], fname, { type: 'image/jpeg' }); } catch (e) { file = null; }
+  const canShare = !!(file && navigator.canShare && navigator.canShare({ files: [file] }));
+  if (!canShare) share.classList.add('hidden');
+  share.onclick = () => { navigator.share({ files: [file], title: 'Hallow Hunt', text: 'Look who I found in Hallow Hunt!' }).catch(() => { /* cancelled */ }); };
+  S.b.querySelector('[data-a=save]').onclick = () => { const a = document.createElement('a'); a.href = p.data; a.download = fname; document.body.appendChild(a); a.click(); detach(a); };
+  const del = S.b.querySelector('[data-a=del]'); let armT = 0;
+  del.onclick = async () => {
+    if (!del.classList.contains('arm')) { del.classList.add('arm'); del.textContent = 'Tap again'; armT = setTimeout(() => { del.classList.remove('arm'); del.textContent = 'Delete'; }, 3000); return; }
+    clearTimeout(armT); await Store.del('photos', p.id); closeScrim(s); if (galleryScrim) closeScrim(galleryScrim); toast('Photo deleted'); refreshTitle(); openGallery();
+  };
+}
+
+/* ---------- hunters and the Family board ---------- */
+const MAX_HUNTERS = 8;
+async function allProfiles() {
+  const ps = await Store.all('profiles');
+  return ps.map((p) => (profile && p.id === profile.id ? profile : normProfile(p)));
+}
+async function switchHunter(id) {
+  if (profile && id === profile.id) return profile;
+  await saveProfile();
+  const p = await Store.get('profiles', id); if (!p) return null;
+  profile = normProfile(p); ensureQuests();
+  await Store.put('meta', { key: 'active', value: id });
+  refreshTitle();
+  return profile;
+}
+async function addHunter(name) {
+  const ps = await Store.all('profiles');
+  if (ps.length >= MAX_HUNTERS) { toast('Up to ' + MAX_HUNTERS + ' hunters can share one phone.'); return null; }
+  const used = ps.map((x) => x.color || 0); let col = 0; while (used.indexOf(col) >= 0 && col < AV_COLORS.length - 1) col++;
+  const p = newProfile(name); p.color = col;
+  await Store.put('profiles', p);
+  return switchHunter(p.id);
+}
+async function removeHunter(id) {
+  if (!profile || id === profile.id) return false;
+  await Store.del('profiles', id);
+  const ph = await Store.all('photos');
+  for (const x of ph) if (x.profile === id) await Store.del('photos', x.id);
+  return true;
+}
+function cleanName(v) { return String(v || '').replace(/[^\x20-\x7E]/g, '').trim().slice(0, 18); }
+async function openFamily() {
+  await saveProfile();
+  const ps = await allProfiles();
+  const rows = ps.map((p) => ({ p, sp: new Set(p.caught.map((c) => c.s)).size, q: questsDoneToday(p) }));
+  rows.sort((a, b) => b.sp - a.sp || b.p.xp - a.p.xp || b.p.caught.length - a.p.caught.length);
+  const union = new Set(); for (const r of rows) for (const c of r.p.caught) union.add(c.s);
+  const S = sheet('Family board', 'Tap a hunter to hunt as them');
+  S.b.appendChild(el('p', 'together', 'Together your family has found <b>' + union.size + ' of ' + SPECIES.length + '</b> spooks'));
+  const x = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>';
+  rows.forEach((r, i) => {
+    const me = r.p.id === profile.id;
+    const row = el('div', 'frow' + (me ? ' me' : ''));
+    row.innerHTML = '<span class="rk">' + (i + 1) + '</span><span class="av" style="background:' + avColor(r.p) + '">' + esc(initial(r.p.name)) + '</span><span class="fb"><div class="fn">' + esc(r.p.name) + '<em>Lv ' + levelFor(r.p.xp) + '</em></div><div class="fs">' + r.sp + '/' + SPECIES.length + ' spooks \u00b7 ' + r.p.caught.length + ' catches \u00b7 quests ' + r.q + '/3</div></span>' + (me ? '<span class="tag">Hunting</span>' : '<button class="rm" aria-label="Remove ' + esc(r.p.name) + '">' + x + '</button>');
+    row.setAttribute('role', 'button'); row.tabIndex = 0;
+    const go = async () => { if (me) return; await switchHunter(r.p.id); sfx('tap'); closeScrim(s); toast('Now hunting as ' + profile.name); };
+    row.addEventListener('click', (e) => { if (e.target.closest('.rm')) return; go(); });
+    const rm = row.querySelector('.rm'); let armT = 0;
+    if (rm) rm.onclick = async () => {
+      if (!rm.classList.contains('arm')) { rm.classList.add('arm'); armT = setTimeout(() => rm.classList.remove('arm'), 3000); toast('Tap again to remove ' + r.p.name + ' and their catches'); return; }
+      clearTimeout(armT); await removeHunter(r.p.id); closeScrim(s); refreshTitle(); openFamily();
+    };
+    S.b.appendChild(row);
+  });
+  if (rows.length < MAX_HUNTERS) {
+    S.b.appendChild(el('div', 'lbl', 'Add a hunter'));
+    const add = el('div', 'addrow', '<input class="inp" maxlength="18" placeholder="Name" autocomplete="off" aria-label="New hunter name"><button>Add</button>');
+    S.b.appendChild(add);
+    const inp = add.querySelector('input');
+    const doAdd = async () => { const n = cleanName(inp.value); if (!n) { inp.focus(); toast('Type a name first'); return; } await addHunter(n); closeScrim(s); toast('Welcome, ' + profile.name + '! Your Spookydex starts fresh.'); };
+    add.querySelector('button').onclick = doAdd;
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') doAdd(); });
+  }
+  S.b.appendChild(el('p', 'hint', 'Up to ' + MAX_HUNTERS + ' hunters can share this phone. Each keeps their own Spookydex, candy, quests, and photos. Everything stays on this phone.'));
+  const s = openScrim(S.sh, false, refreshTitle); S.x.onclick = () => closeScrim(s, refreshTitle);
+}
+
+/* ---------- screen wake lock while hunting ---------- */
+let wakeLock = null;
+async function keepAwake(on) {
+  try {
+    if (on && navigator.wakeLock && !wakeLock && !document.hidden) { wakeLock = await navigator.wakeLock.request('screen'); wakeLock.addEventListener('release', () => { wakeLock = null; }); }
+    else if (!on && wakeLock) { const w = wakeLock; wakeLock = null; await w.release(); }
+  } catch (e) { wakeLock = null; }
+}
+
+/* ---------- sound: small Web Audio synths, no files ---------- */
+let sfxGain = null, noiseBuf = null;
+function sfxOut() { if (!sfxGain) { sfxGain = audioCtx.createGain(); sfxGain.gain.value = 0.55; sfxGain.connect(audioCtx.destination); } return sfxGain; }
+function tone(t, f0, f1, dur, type, vol, delay) {
+  const ac = audioCtx, s = t + (delay || 0); const o = ac.createOscillator(), g = ac.createGain();
+  o.type = type || 'sine'; o.frequency.setValueAtTime(f0, s); if (f1 && f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, s + dur);
+  g.gain.setValueAtTime(0.0001, s); g.gain.exponentialRampToValueAtTime(vol || 0.2, s + Math.min(0.02, dur * 0.3)); g.gain.exponentialRampToValueAtTime(0.0001, s + dur);
+  o.connect(g); g.connect(sfxOut()); o.start(s); o.stop(s + dur + 0.05);
+}
+function noise(t, dur, vol, f0, f1, q, delay) {
+  const ac = audioCtx, s = t + (delay || 0);
+  if (!noiseBuf) { noiseBuf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+  const src = ac.createBufferSource(); src.buffer = noiseBuf; const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = q || 1.2;
+  bp.frequency.setValueAtTime(f0, s); if (f1) bp.frequency.exponentialRampToValueAtTime(f1, s + dur);
+  const g = ac.createGain(); g.gain.setValueAtTime(0.0001, s); g.gain.exponentialRampToValueAtTime(vol, s + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, s + dur);
+  src.connect(bp); bp.connect(g); g.connect(sfxOut()); src.start(s); src.stop(s + dur + 0.05);
+}
+const SFX = {
+  appear(t) { tone(t, 330, 495, 0.35, 'sine', 0.18); tone(t, 495, 392, 0.5, 'sine', 0.14, 0.3); },
+  throw(t) { noise(t, 0.32, 0.25, 600, 2400, 1.4); },
+  curve(t) { tone(t, 520, 1040, 0.18, 'triangle', 0.15); },
+  hit(t) { tone(t, 180, 70, 0.18, 'triangle', 0.4); noise(t, 0.1, 0.15, 1800, 0, 0.8); },
+  miss(t) { tone(t, 220, 140, 0.2, 'sine', 0.15); },
+  wobble(t) { tone(t, 900, 700, 0.07, 'square', 0.07); tone(t, 700, 600, 0.07, 'square', 0.05, 0.09); },
+  catch(t) { [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(t, f, f, 0.32, 'triangle', 0.22, i * 0.09)); },
+  break(t) { noise(t, 0.18, 0.35, 2600, 800, 0.9); tone(t, 600, 200, 0.25, 'sawtooth', 0.07); },
+  flee(t) { tone(t, 880, 220, 0.6, 'sine', 0.14); },
+  level(t) { [392, 523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(t, f, f, i === 4 ? 0.6 : 0.16, 'square', 0.08, i * 0.11)); },
+  quest(t) { tone(t, 784, 784, 0.18, 'triangle', 0.2); tone(t, 1175, 1175, 0.35, 'triangle', 0.2, 0.14); },
+  shutter(t) { noise(t, 0.05, 0.4, 3000, 0, 0.7); noise(t, 0.06, 0.3, 2000, 0, 0.7, 0.07); },
+  evolve(t) { tone(t, 220, 880, 1.4, 'sine', 0.2); [880, 1108.73, 1318.51].forEach((f, i) => tone(t, f, f, 0.45, 'triangle', 0.16, 1.5 + i * 0.1)); },
+  chime(t) { tone(t, 1318.51, 1318.51, 0.5, 'sine', 0.18); tone(t, 1760, 1760, 0.6, 'sine', 0.12, 0.08); },
+  tap(t) { tone(t, 660, 660, 0.05, 'sine', 0.08); }
+};
+function sfx(name) {
+  if (settings.mute || !audioCtx) return;
+  try { if (audioCtx.state === 'suspended') audioCtx.resume(); const f = SFX[name]; if (f) f(audioCtx.currentTime + 0.01); } catch (e) { /* sound is optional */ }
+}
+
+/* =====================================================================
    MAIN LOOP
    ===================================================================== */
 let rafId = 0, lastT = 0;
@@ -1283,7 +1902,7 @@ function frame(now) {
   renderer.render(scene, camera);
   if (G.enc) drawEnc(now / 1000); else drawWorldFx(now / 1000);
 }
-document.addEventListener('visibilitychange', () => { if (document.hidden) saveProfile(); else lastT = performance.now(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) saveProfile(); else { lastT = performance.now(); if (G.hunting) keepAwake(true); } });
 
 /* =====================================================================
    SHEETS: catch card, Spookydex, detail, settings
@@ -1302,29 +1921,44 @@ function sheet(title, sub) {
   return { sh, b, x, h };
 }
 
-function showCatchCard(sp, glow, first, grade, curve) {
+function showCatchCard(sp, glow, first, grade, curve, rw) {
+  rw = rw || { xp: 0, candy: 0, lvl: 0, firstDay: false, before: 0 };
   const card = el('div', 'card');
-  card.innerHTML = '<div class="kick">Caught!</div><canvas></canvas><h3>' + (glow ? 'Glowing ' : '') + esc(sp.name) + '</h3><div class="sub">#' + pad3(sp.no) + ' &middot; ' + RARITY[sp.rar].label + (sp.night ? ' &middot; night spook' : '') + '</div><div class="badges"></div><div class="row"><button class="b2" data-a="dex">Spookydex</button><button class="b1" data-a="ok">Keep Hunting</button></div>';
+  const lp = levelProgress();
+  card.innerHTML = '<div class="kick">Caught!</div>' + (rw.lvl ? '<div class="lvlup">Level up! You are level ' + rw.lvl + '</div>' : '') + '<canvas></canvas><h3>' + (glow ? 'Glowing ' : '') + esc(sp.name) + '</h3><div class="sub">#' + pad3(sp.no) + ' &middot; ' + RARITY[sp.rar].label + (sp.night ? ' &middot; night spook' : '') + '</div>' +
+    '<div class="xpline"><b>+' + rw.xp.toLocaleString() + ' XP</b><span>+' + rw.candy + ' ' + FAMILY[sp.fam] + ' candy</span></div>' +
+    '<div class="xpwrap"><div class="xpbar"><i></i></div><div class="xpcap">' + levelCaption(lp) + '</div></div>' +
+    '<div class="badges"></div><div class="row"><button class="b2" data-a="dex">Spookydex</button><button class="b1" data-a="ok">Keep Hunting</button></div>';
   const bd = card.querySelector('.badges');
   if (first) bd.appendChild(el('span', 'bd new', 'New to your Spookydex'));
   if (glow) bd.appendChild(el('span', 'bd glow', 'Glowing'));
+  if (rw.firstDay) bd.appendChild(el('span', 'bd glow', 'First catch today: double candy'));
   if (grade) bd.appendChild(el('span', 'bd', grade.charAt(0).toUpperCase() + grade.slice(1) + ' throw'));
   if (curve) bd.appendChild(el('span', 'bd', 'Curveball'));
   bd.appendChild(el('span', 'bd', 'You have ' + caughtCount(sp.id)));
   const s = openScrim(card, true, resumeHunt);
-  requestAnimationFrame(() => blit(card.querySelector('canvas'), creatureImage(sp, glow).canvas));
+  const bar = card.querySelector('.xpbar i');
+  bar.style.transition = 'none'; bar.style.width = (rw.lvl || lp.L !== rw.beforeL ? 0 : Math.round(rw.before * 100)) + '%';
+  requestAnimationFrame(() => { blit(card.querySelector('canvas'), creatureImage(sp, glow).canvas); requestAnimationFrame(() => { bar.style.transition = ''; bar.style.width = Math.round(lp.frac * 100) + '%'; }); });
   card.querySelector('[data-a=ok]').onclick = () => closeScrim(s, resumeHunt);
   card.querySelector('[data-a=dex]').onclick = () => { closeScrim(s); openDex(sp.id); };
   $('hud').classList.add('hidden'); $('chips').classList.add('hidden');
 }
 function resumeHunt() { if (G.hunting && !G.enc) { $('hud').classList.remove('hidden'); $('chips').classList.remove('hidden'); updateChips(); } }
 
+let dexScrim = null;
 function openDex(focusId) {
+  if (dexScrim) { detach(dexScrim); dexScrim = null; }
   const caughtSp = SPECIES.filter((s) => caughtCount(s.id) > 0).length;
   const seenSp = SPECIES.filter((s) => profile.seen[s.id]).length;
   const S1 = sheet('Spookydex', profile.name + "'s collection");
   const sum = el('div', 'dex-sum', '<div><b>' + caughtSp + '/' + SPECIES.length + '</b><span>caught</span></div><div><b>' + seenSp + '</b><span>seen</span></div><div><b>' + profile.caught.length + '</b><span>total catches</span></div>');
+  const lp = levelProgress();
+  const strip = el('div', 'strip', '<div class="top"><span class="av" style="background:' + avColor(profile) + '">' + esc(initial(profile.name)) + '</span><span>' + esc(profile.name) + '</span><em>Level ' + lp.L + '</em></div><div class="xpbar"><i style="width:' + Math.round(lp.frac * 100) + '%"></i></div><div class="xpcap">' + levelCaption(lp) + '</div>');
+  S1.b.appendChild(strip);
   S1.b.appendChild(sum);
+  const ab = el('button', 'album-btn', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Photo album');
+  ab.onclick = () => openGallery(); S1.b.appendChild(ab);
   const grid = el('div', 'dex-grid'); S1.b.appendChild(grid);
   const jobs = [];
   for (const sp of SPECIES) {
@@ -1337,7 +1971,8 @@ function openDex(focusId) {
     jobs.push(() => blit(cv, n ? creatureImage(sp, false).canvas : creatureSil(sp)));
     if (n || seen) cell.onclick = () => openDetail(sp); else cell.onclick = () => toast('Not found yet. Keep hunting!');
   }
-  const s = openScrim(S1.sh, false, resumeHunt); S1.x.onclick = () => closeScrim(s, resumeHunt);
+  const done = () => { dexScrim = null; resumeHunt(); };
+  const s = openScrim(S1.sh, false, done); S1.x.onclick = () => closeScrim(s, done); dexScrim = s;
   $('hud').classList.add('hidden'); $('chips').classList.add('hidden');
   let i = 0; (function step() { const end = Math.min(jobs.length, i + 6); for (; i < end; i++) jobs[i](); if (i < jobs.length) requestAnimationFrame(step); })();
   if (focusId) setTimeout(() => openDetail(SPECIES_BY_ID[focusId]), 60);
@@ -1350,6 +1985,7 @@ function openDetail(sp) {
   S2.b.innerHTML = '<div class="det-top"><canvas></canvas><div class="det-tags"><span class="rar ' + sp.rar + '">' + RARITY[sp.rar].label + '</span><span class="tg">' + (sp.night ? 'Loves the night' : 'Out day and night') + '</span><span class="tg">Stage ' + sp.stage + '</span></div></div>' +
     '<p class="det-desc">' + (n ? esc(sp.desc) : 'Catch one to learn its story.') + '</p>' +
     '<div class="det-stats"><div><b>' + n + '</b><span>caught</span></div><div><b>' + gn + '</b><span>glowing</span></div><div><b>' + (first ? first.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '--') + '</b><span>first catch</span></div></div>' +
+    candyBlock(sp, n) +
     '<div class="lbl">Family</div><div class="fam"></div>';
   const fam = S2.b.querySelector('.fam'); const line = familyOf(sp);
   line.forEach((f, i) => {
@@ -1360,15 +1996,32 @@ function openDetail(sp) {
     requestAnimationFrame(() => blit(st.querySelector('canvas'), k ? creatureImage(f, false).canvas : creatureSil(f)));
   });
   if (line.length === 1) fam.appendChild(el('span', 'hint', 'Does not evolve'));
-  const s = openScrim(S2.sh, false); S2.x.onclick = () => closeScrim(s);
+  let changed = false;
+  const after = () => { if (changed && dexScrim) openDex(); refreshTitle(); };
+  const s = openScrim(S2.sh, false, after); S2.x.onclick = () => closeScrim(s, after);
+  const evb = S2.b.querySelector('.evo-btn');
+  if (evb) evb.onclick = () => {
+    const res = evolveOne(sp); if (!res) return;
+    changed = true; closeScrim(s, after);
+    showEvolveCard(res, (to) => openDetail(to));
+  };
+  const sdb = S2.b.querySelector('.send-btn'); let sArm = 0;
+  if (sdb) sdb.onclick = () => {
+    if (!sdb.classList.contains('arm')) { sdb.classList.add('arm'); sdb.innerHTML = 'Tap again to send one home'; sArm = setTimeout(() => { sdb.classList.remove('arm'); sdb.innerHTML = 'Send one home <small>+' + CANDY.send + ' candy</small>'; }, 3000); return; }
+    clearTimeout(sArm); const r = sendHome(sp); if (!r) return;
+    changed = true; closeScrim(s, after); sfx('tap');
+    toast('A ' + sp.name + ' went home happy. +' + CANDY.send + ' ' + FAMILY[sp.fam] + ' candy');
+    setTimeout(() => openDetail(sp), 30);
+  };
   requestAnimationFrame(() => blit(S2.b.querySelector('.det-top canvas'), n ? creatureImage(sp, gn > 0 && n === gn).canvas : creatureSil(sp)));
 }
 
 function openSettings() {
   const S3 = sheet('Settings');
   S3.b.innerHTML =
-    '<div class="howto"><b>How to hunt.</b> Turn around slowly and look for spooks pinned in your room. Arrows at the edge point to spooks you cannot see. Tap a spook, then swipe the lantern up to throw it. Land it inside the shrinking ring for a Nice, Great, or Excellent throw. Spin the lantern in a little circle before you let go for a curveball. Some spooks only come out at night.</div>' +
+    '<div class="howto"><b>How to hunt.</b> Turn around slowly and look for spooks pinned in your room. Arrows at the edge point to spooks you cannot see. Tap a spook, then swipe the lantern up to throw it. Land it inside the shrinking ring for a Nice, Great, or Excellent throw. Spin the lantern in a little circle before you let go for a curveball. Some spooks only come out at night.<br><br><b>Grow.</b> Every catch earns XP and family candy, and your first catch each day doubles the candy. Spend 12 candy to evolve a first stage spook and 36 for a second stage. Send extras home for 1 candy each. Turn on <b>Walk</b> outside and a new spook comes to find you every 100 meters, about 130 steps.</div>' +
     '<div class="set-row"><label>View</label><div class="seg" id="segView"><button data-v="auto">Camera</button><button data-v="backdrop">Spooky yard</button><button data-v="drag">Drag only</button></div><div class="hint">Camera uses your phone camera and motion. Spooky yard skips the camera. Drag only works without motion, which is best on a computer. Changes apply on your next hunt.</div></div>' +
+    '<div class="set-row"><label>Sound</label><div class="seg" id="segSound"><button data-m="0">On</button><button data-m="1">Off</button></div></div>' +
     '<div class="set-row"><label for="nameInp">Hunter name</label><input class="inp" id="nameInp" maxlength="18" autocomplete="off"></div>' +
     '<div class="set-row"><label>Tutorial</label><button class="ghost-btn" id="tutBtn" style="margin-top:0">Show the throwing tip again</button></div>' +
     '<div class="set-row"><label>Erase</label><button class="danger" id="eraseBtn">Erase this hunter\'s catches</button><div class="hint">Tap twice to erase. This cannot be undone.</div></div>' +
@@ -1377,6 +2030,10 @@ function openSettings() {
   const paint = () => seg.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.v === settings.view));
   seg.onclick = (e) => { const b = e.target.closest('button'); if (!b) return; settings.view = b.dataset.v; saveSettings(); paint(); };
   paint();
+  const ss = S3.b.querySelector('#segSound');
+  const paintS = () => ss.querySelectorAll('button').forEach((b) => b.classList.toggle('on', (b.dataset.m === '1') === !!settings.mute));
+  ss.onclick = (e) => { const b = e.target.closest('button'); if (!b) return; settings.mute = b.dataset.m === '1'; saveSettings(); paintS(); sfx('chime'); };
+  paintS();
   const ni = S3.b.querySelector('#nameInp'); ni.value = profile.name;
   ni.onchange = () => { const v = ni.value.replace(/[^\x20-\x7E]/g, '').trim().slice(0, 18); profile.name = v || 'Hunter'; ni.value = profile.name; saveProfile(); refreshTitle(); };
   S3.b.querySelector('#tutBtn').onclick = () => { settings.tutorial = true; saveSettings(); toast('The throwing tip will show on your next spook'); };
@@ -1395,9 +2052,13 @@ function openSettings() {
    ===================================================================== */
 function refreshTitle() {
   if (!profile) return;
-  $('hName').textContent = profile.name; $('hAv').textContent = (profile.name.charAt(0) || 'H').toUpperCase();
+  $('hName').textContent = profile.name; $('hAv').textContent = initial(profile.name); $('hAv').style.background = avColor(profile);
+  $('hLv').textContent = 'Lv ' + profile.level;
   const k = SPECIES.filter((s) => caughtCount(s.id) > 0).length;
   $('titleDexCount').textContent = k + '/' + SPECIES.length;
+  updateQuestBadges();
+  photosOf(profile.id).then((ps) => { $('titlePhotoCount').textContent = ps.length ? String(ps.length) : ''; });
+  Store.all('profiles').then((ps) => { $('titleFamCount').textContent = ps.length > 1 ? String(ps.length) : ''; });
 }
 const Show = { items: [], raf: 0 };
 function startShowcase() {
@@ -1430,15 +2091,26 @@ $('exitBtn').addEventListener('click', endHunt);
 $('centerBtn').addEventListener('click', () => recenter(false));
 $('runBtn').addEventListener('click', () => { if (G.enc) { endEncounter(); toast('You backed away quietly'); } });
 $('gearBtn').addEventListener('click', () => { if (profile) openSettings(); });
+$('hunterBtn').addEventListener('click', () => { if (profile) openFamily(); });
+$('titleFamBtn').addEventListener('click', () => { if (profile) openFamily(); });
+$('titleQuestBtn').addEventListener('click', () => { if (profile) openQuests(); });
+$('titlePhotoBtn').addEventListener('click', () => { if (profile) openGallery(); });
+$('questBtn').addEventListener('click', () => openQuests());
+$('walkBtn').addEventListener('click', () => toggleWalk());
+$('snapBtn').addEventListener('click', () => snapPhoto());
+$('encSnap').addEventListener('click', () => snapPhoto());
+document.addEventListener('pointerdown', unlockAudio, { once: true });
 
 window.addEventListener('DOMContentLoaded', async () => {
   try { await loadProfile(); } catch (e) { profile = newProfile('Hunter'); }
-  refreshTitle(); startShowcase();
+  ensureQuests(); refreshTitle(); startShowcase();
 });
 window.addEventListener('pagehide', () => { if (profile) saveProfile(); });
 
 /* test hooks for the smoke test (harmless in production) */
-window.HH = { G, SPECIES, CATCH, spawnOne, startEncounter, launch, get profile() { return profile; }, Store, openDex };
+window.HH = { G, SPECIES, CATCH, spawnOne, startEncounter, launch, get profile() { return profile; }, Store, openDex,
+  xpForLevel, levelFor, rewardCatch, evolveOne, sendHome, questsFor, questEvent, ensureQuests, dayKey, haversine, onPos, Walk, startWalk, stopWalk,
+  snapPhoto, photosOf, openGallery, openQuests, openFamily, addHunter, switchHunter, removeHunter, allProfiles, sfx, SFX, settings, finishCatch, saveProfile };
 </script>
 </body>
 </html>
