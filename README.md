@@ -1,6 +1,6 @@
 # Hallow Hunt | AppADay 177
 
-Hallow Hunt is a family friendly Halloween creature collector played through your phone camera. Spot original ghosts, goblins, pumpkin sprites, and more pinned around your room or found on a walk, then swipe a glowing lantern to catch them, fill your Spookydex, evolve your favorites, and snap AR photo cards.
+Hallow Hunt is a family friendly Halloween creature collector played through your phone camera. Spot original ghosts, goblins, pumpkin sprites, and more pinned around your room or found on a walk, then swipe a glowing lantern to catch them, fill a 44 spook Spookydex, evolve your favorites, and snap AR photo cards.
 
 **Live:** https://augustineiacopelli.github.io/appaday-177-hallow-hunt/
 **Category:** G (Games) &middot; **Claude API:** No &middot; **Part of:** [AppADay](https://augustineiacopelli.github.io/appaday/)
@@ -23,23 +23,23 @@ Tap **Start Hunt**. The app asks for motion access first, then the camera. Turn 
 
 Recenter re-anchors the view to the direction you are facing. Settings (gear) chooses the view, renames the hunter, replays the throwing tip, and erases catches with a two tap guard.
 
-## The 22 spooks
+## The 44 spooks
 
-Eleven families: Wisp (3 stages), Pumpkin (3), Goblin (3), Bat (2), Spider (2), Cat (2), Skeleton (2), Candle (2), and the single stage Hootle, Wrapsy, and the legendary Lunamoth. Every creature is painted in code on a 2D canvas, cached, and used as a three.js sprite texture. Each has a glowing variant with its own palette.
+Twenty one families. Three stage lines: Wisp, Pumpkin, Goblin, Witch Hat (Hatling, Hexhat, Grand Hexhat), and Slime (Gloop, Oozle, Slimeking). Two stage lines: Bat, Spider, Cat, Skeleton, Candle, Owl (Hootle to Hootmaster), Mummy (Wrapsy to Pharaowrap), Cauldron (Bubblepot, Brewbelly), Patchwork (Stitchkin, Boltbrute), Scarecrow (Strawby, Scarecrown), Crow (Cawlet, Ravenshade), Vampire (Fangle, Nocturne), and Tombstone (Gravelet, Tombtop). Single stage: Peeper and the two legendaries, Lunamoth, which only visits at night, and Sugarcomet, a candy corn shooting star that only streaks by in daylight. Every creature is painted in code on a 2D canvas, cached, and used as a three.js sprite texture. Each has a glowing variant with its own palette.
 
 ## Growing your spooks
 
-Every catch earns XP: 100 for the catch, 500 for a new species, 300 for a glowing one, 20, 60, or 120 for a Nice, Great, or Excellent throw, and 20 for a curveball. The first catch of each day adds 300 XP and doubles the candy. Levels run from 1 to 30 (level L needs 300(L-1) + 75(L-1)(L-2) total XP, so level 30 sits at 69,600).
+Every catch earns XP: 50 for the catch, 150 for a new species, 150 for a glowing one, 10, 30, or 60 for a Nice, Great, or Excellent throw, and 10 for a curveball. The first catch of each day adds 100 XP and doubles the candy. Levels run from 1 to 30. Level L needs 600(L-1) + 150(L-1)(L-2) total XP, so level 2 is 600, level 3 is 1,500, level 10 is 16,200, and level 30 sits at 139,200. Even the best possible first catch (520 XP) stays short of level 2.
 
-Each catch also gives 3 candy for its family (6 for a glowing one). Evolving costs 12 candy for a first stage spook and 36 for a second stage, earns 500 XP, and keeps a glowing spook glowing. Send Home trades an extra for 1 candy and always keeps your last one of a kind.
+Each catch also gives 3 candy for its family (6 for a glowing one). Evolving costs 12 candy for a first stage spook and 36 for a second stage, earns 250 XP, and keeps a glowing spook glowing. Send Home trades an extra for 1 candy and always keeps your last one of a kind.
 
 ## Daily quests
 
-Three quests a day, seeded by the date so everyone in the family gets the same set. The first is always a catch count; the other two come from family catches, ring throws, Great or Excellent throws, Excellent throws, curveballs, Send Home, and photos. Each pays 250 XP and 4 candy, and finishing all three adds a 500 XP bonus. New quests arrive at midnight.
+Three quests a day, seeded by the date so everyone in the family gets the same set. The first is always a catch count; the other two come from family catches, ring throws, Great or Excellent throws, Excellent throws, curveballs, Send Home, and photos. Each pays 150 XP and 4 candy, and finishing all three adds a 300 XP bonus. New quests arrive at midnight.
 
 ## Walk mode
 
-Tap Walk while hunting and the app watches your location (it is only asked for here). Every 100 meters, about 130 steps, a spook appears in front of you with better odds of an uncommon or rare, plus 25 XP. Distance uses the haversine formula between fixes, ignores fixes less accurate than 35 meters and jitter under 5 meters, and pays nothing above 3 meters per second, which turns the safety banner red. The banner stays up the whole time you walk. Only the distance total is saved, never your location.
+Tap Walk while hunting and the app watches your location (it is only asked for here). Every 100 meters, about 130 steps, a spook appears in front of you with better odds of an uncommon or rare, plus 15 XP. Distance uses the haversine formula between fixes, ignores fixes less accurate than 35 meters and jitter under 5 meters, and pays nothing above 3 meters per second, which turns the safety banner red. The banner stays up the whole time you walk. Only the distance total is saved, never your location.
 
 ## Photos
 
